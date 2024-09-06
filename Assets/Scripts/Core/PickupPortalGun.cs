@@ -5,7 +5,7 @@ public class PickupPortalGun : MonoBehaviour
     public GameObject player; // Pelaaja-objekti
     public Transform gunHoldPosition; // Paikka, johon ase kiinnittyy pelaajan kädessä
 
-    private bool isPickedUp = false;
+    public bool isPickedUp = false;
 
     void Start()
     {
@@ -32,22 +32,22 @@ public class PickupPortalGun : MonoBehaviour
 
         // Kiinnitä ase pelaajan käteen
         transform.SetParent(gunHoldPosition);
-        transform.position = Vector3.zero;
-        transform.rotation = Quaternion.identity;
+
+        // Aseta ase gunHoldPositionin kohdalle ja suunnalle
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
 
         // Kytke ase takaisin näkyviin pelaajan kädessä
         gameObject.SetActive(true);
     }
 
-    void Update()
+    void LateUpdate() // Käytetään LateUpdatea varmistamaan, että kamera on jo liikkunut ennen kuin ase asetetaan
     {
-        if (isPickedUp == true)
+        if (isPickedUp)
         {
+            // Päivitä aseen sijainti ja rotaatio suhteessa pelaajan kameraan
             transform.position = gunHoldPosition.position;
             transform.rotation = gunHoldPosition.rotation;
-
-            // Kytke ase takaisin näkyviin pelaajan kädessä
-            gameObject.SetActive(true);
         }
     }
 }
