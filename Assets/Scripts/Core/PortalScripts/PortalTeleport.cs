@@ -7,28 +7,33 @@ public class PortalTeleport : MonoBehaviour
     [SerializeField] private Transform otherPortal; // Toinen portaali
     [SerializeField] private Transform player; // Pelaajan Transform
     [SerializeField] private CharacterController playerController; // Pelaajan CharacterController
+    [SerializeField] private float teleportCooldown = 1.0f; // Viive teleportin välillä
+
+    private bool canTeleport = true; // Määrittää, voiko pelaaja teleportata
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // Varmistaa, että vain pelaaja teleportataan
+        if (other.CompareTag("Player") && canTeleport) // Varmistaa, että vain pelaaja teleportataan ja viive on ohi
         {
-            TeleportPlayer();
+            StartCoroutine(TeleportPlayer());
         }
     }
 
-    private void TeleportPlayer()
+    private IEnumerator TeleportPlayer()
     {
-        // Lasketaan pelaajan sijainti suhteessa portaaliin
-        Vector3 localPlayerPosition = transform.InverseTransformPoint(player.position);
+        canTeleport = false; // Estetään pelaajaa teleporttaamasta heti uudelleen
 
         // Sijoitetaan pelaaja toisen portaalin sisälle
-        Vector3 newPosition = otherPortal.TransformPoint(localPlayerPosition);
-        playerController.enabled = false; // Deaktivoidaan CharacterController, jotta ei tapahdu 'törmäystä' teleportin aikana
-        player.position = newPosition;
-        playerController.enabled = true; // Aktivoi CharacterController uudelleen
+        Vector3 newPosition = otherPortal.transform.position;
+        // playerController.enabled = false; // Deaktivoidaan CharacterController, jotta ei tapahdu 'törmäystä' teleportin aikana
+        
+        // Vector3 moveDelta = newPosition;
+        playerController.Move(newPosition);
 
-        // Liikutetaan pelaajaa samankaltaiseen suuntaan kuin ennen teleporttia
-        Vector3 localPlayerDirection = transform.InverseTransformDirection(player.forward);
-        playerController.transform.forward = otherPortal.TransformDirection(localPlayerDirection);
+        Debug.Log($"Pelaajan positio: {player.transform.position}, portaali: {otherPortal.transform.position}, new position: {newPosition}");
+
+        // Odotetaan ennen kuin pelaaja voi teleportata uudelleen
+        yield return new WaitForSeconds(teleportCooldown);
+        canTeleport = true; // Pelaaja voi teleportata uudelleen viiveen jälkeen
     }
 }

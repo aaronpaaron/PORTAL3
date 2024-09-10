@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 16329253429083119, guid: 1bb7016be5bfd4a4abdf1fd334e825b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 16329253429083119, guid: 1bb7016be5bfd4a4abdf1fd334e825b6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -289,11 +289,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3733840065253054554, guid: 8a6d5d503fb3cab45ad046310e08353c, type: 3}
   m_PrefabInstance: {fileID: 1973188939}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &79629805 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2813883742185668013, guid: 8a6d5d503fb3cab45ad046310e08353c, type: 3}
-  m_PrefabInstance: {fileID: 1973188939}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &79629807 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2930132988654549120, guid: 8a6d5d503fb3cab45ad046310e08353c, type: 3}
@@ -332,9 +327,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b797031f0481745babedce9497d5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherPortal: {fileID: 1977989592}
+  otherPortal: {fileID: 11277799}
   player: {fileID: 1681995542}
   playerController: {fileID: 1681995544}
+  teleportCooldown: 1
 --- !u!1 &436848861
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,11 +2318,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5557150819002829546, guid: 1bb7016be5bfd4a4abdf1fd334e825b6, type: 3}
   m_PrefabInstance: {fileID: 5974832}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1977989592 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 16329253429083119, guid: 1bb7016be5bfd4a4abdf1fd334e825b6, type: 3}
-  m_PrefabInstance: {fileID: 5974832}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &1977989594 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1704776385819860238, guid: 1bb7016be5bfd4a4abdf1fd334e825b6, type: 3}
@@ -2344,9 +2335,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81b797031f0481745babedce9497d5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherPortal: {fileID: 79629805}
+  otherPortal: {fileID: 514714318}
   player: {fileID: 1681995542}
   playerController: {fileID: 1681995544}
+  teleportCooldown: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
