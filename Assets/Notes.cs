@@ -17,7 +17,7 @@ public class Notes : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (Action == true)
             {
