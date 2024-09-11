@@ -11,6 +11,9 @@ public class PickupPortalGun : MonoBehaviour
     {
         // Varmista, että ase näkyy alussa
         gameObject.SetActive(true);
+        
+        player = GameObject.FindWithTag("Player"); // Pelaaja-objekti
+        gunHoldPosition = GameObject.FindWithTag("GunHoldPos").transform;
     }
 
     void OnTriggerEnter(Collider other)
