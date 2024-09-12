@@ -14,7 +14,7 @@ public class Door : MonoBehaviour
     {
         float distance = Vector3.Distance(player.position, door.position);
 
-        if (distance <= 25)
+        if (distance <= 5)
         {
             anim.SetBool("Near", true);
         }
