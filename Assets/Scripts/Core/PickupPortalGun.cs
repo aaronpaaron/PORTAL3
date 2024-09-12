@@ -1,9 +1,13 @@
+using System;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class PickupPortalGun : MonoBehaviour
 {
     public GameObject player; // Pelaaja-objekti
     public Transform gunHoldPosition; // Paikka, johon ase kiinnittyy pelaajan kädessä
+
+    public static Weapon equippedWeapon = Weapon.None;
 
     public bool isPickedUp = false;
 
@@ -14,6 +18,7 @@ public class PickupPortalGun : MonoBehaviour
         
         player = GameObject.FindWithTag("Player"); // Pelaaja-objekti
         gunHoldPosition = GameObject.FindWithTag("GunHoldPos").transform;
+        equippedWeapon = Weapon.None;
     }
 
     void OnTriggerEnter(Collider other)
@@ -29,6 +34,7 @@ public class PickupPortalGun : MonoBehaviour
     {
         isPickedUp = true;
         Debug.Log("Picked up Portal Gun");
+        equippedWeapon = Weapon.PortalGun;
 
         // Kytke ase pois näkyvistä sen alkuperäisessä sijainnissa
         gameObject.SetActive(false);
@@ -52,5 +58,12 @@ public class PickupPortalGun : MonoBehaviour
             transform.position = gunHoldPosition.position;
             transform.rotation = gunHoldPosition.rotation;
         }
+    }
+
+    public enum Weapon
+    {
+        None,
+
+        PortalGun
     }
 }

@@ -5,6 +5,8 @@ public class PortalGun : MonoBehaviour
     public GameObject portalA; // Viittaa Portaali A:han
     public GameObject portalB; // Viittaa Portaali B:hen
 
+    public float minimumPortalDistance = 3.0f; // Minimietäisyys portaalien välillä
+
     private bool isPortalAActive = true; // Tarkistaa, kumpi portaali on aktiivinen
 
     void Start()
@@ -17,7 +19,7 @@ public class PortalGun : MonoBehaviour
     void Update()
     {
         // Tarkistaa, onko hiiren vasen painike painettu
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && PickupPortalGun.equippedWeapon == PickupPortalGun.Weapon.PortalGun)
         {
             HandlePortalSwitch();
         }
@@ -34,7 +36,14 @@ public class PortalGun : MonoBehaviour
             Vector3 hitPoint = hit.point;
             Vector3 hitNormal = hit.normal;
 
-            // Aseta portaalin sijainti
+            // Tarkista, onko uusi portaali liian lähellä toista
+            if (IsTooCloseToOtherPortal(hitPoint))
+            {
+                Debug.Log("Portaalia ei voi asettaa liian lähelle toista portaalia.");
+                return; // Estetään uuden portaalin sijoittaminen
+            }
+
+            // Aseta portaalin sijainti ja rotaatio
             if (isPortalAActive)
             {
                 portalB.SetActive(true);
@@ -53,20 +62,36 @@ public class PortalGun : MonoBehaviour
         }
     }
 
+    bool IsTooCloseToOtherPortal(Vector3 hitPoint)
+    {
+        // Tarkista, jos Portaali A on aktiivinen ja liian lähellä uutta portaalia
+        if (portalA.activeInHierarchy && Vector3.Distance(hitPoint, portalA.transform.position) < minimumPortalDistance)
+        {
+            return true;
+        }
+
+        // Tarkista, jos Portaali B on aktiivinen ja liian lähellä uutta portaalia
+        if (portalB.activeInHierarchy && Vector3.Distance(hitPoint, portalB.transform.position) < minimumPortalDistance)
+        {
+            return true;
+        }
+
+        // Portaali ei ole liian lähellä
+        return false;
+    }
+
     Quaternion CalculatePortalRotation(Vector3 hitNormal)
     {
-        // Laske portaalin y-akseli ylöspäin suhteessa osumapintaan
-        Vector3 up = Vector3.up;
-        // Käytetään cameraa määrittämään, mihin suuntaan portaalin etupään pitäisi osoittaa
-        Vector3 forward = Camera.main.transform.forward;
-
-        // Laske rotaatio niin, että portaalin y-akseli on ylöspäin
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, hitNormal);
-
-        // Kierrä portaalin etupää kameran suuntaan
-        Vector3 desiredForward = rotation * forward;
-        rotation = Quaternion.LookRotation(desiredForward, up);
-
-        return rotation;
+        // Tarkista, onko portaali kiinnittymässä pystysuoraan pintaan (seinä)
+        if (Mathf.Abs(hitNormal.y) < 0.1f)
+        {
+            // Pystysuora pinta (seinä) - portaali asennetaan seinälle
+            return Quaternion.LookRotation(-hitNormal, Vector3.up);
+        }
+        else
+        {
+            // Vaakasuora pinta (maa/lattia) - portaali asennetaan ylös osoittaen
+            return Quaternion.LookRotation(Vector3.forward, hitNormal);
+        }
     }
 }
