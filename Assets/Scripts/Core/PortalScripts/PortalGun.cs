@@ -10,6 +10,7 @@ public class PortalGun : MonoBehaviour
     public float scalingDuration = 0.5f; // Kuinka kauan skaalaus kestää
 
     private bool isPortalAActive = true; // Tarkistaa, kumpi portaali on aktiivinen
+    private bool hasFirstPortalPlaced = false; // Tarkistaa, onko ensimmäinen portaali asetettu
 
     void Start()
     {
@@ -64,25 +65,15 @@ public class PortalGun : MonoBehaviour
                 StartCoroutine(ScalePortal(activePortal));
             }
 
-            // Jos toista portaalia ei ole vielä luotu, luo se automaattisesti ensimmäisen jälkeen
-            if (!portalA.activeInHierarchy || !portalB.activeInHierarchy)
+            // Jos tämä on ensimmäinen portaali, asetetaan toinen portaali editorin sijaintiin
+            if (!hasFirstPortalPlaced)
             {
-                // Aseta toinen portaali näkyväksi jonnekin lähelle ensimmäistä portaalia
-                Vector3 offset = new Vector3(2, 0, 0); // Esimerkki siirrosta
-                if (isPortalAActive && !portalA.activeInHierarchy)
-                {
-                    portalA.SetActive(true);
-                    portalA.transform.position = hitPoint + offset;
-                    portalA.transform.rotation = CalculatePortalRotation(hitNormal);
-                    StartCoroutine(ScalePortal(portalA));
-                }
-                else if (!isPortalAActive && !portalB.activeInHierarchy)
-                {
-                    portalB.SetActive(true);
-                    portalB.transform.position = hitPoint + offset;
-                    portalB.transform.rotation = CalculatePortalRotation(hitNormal);
-                    StartCoroutine(ScalePortal(portalB));
-                }
+                hasFirstPortalPlaced = true;
+
+                // Aseta toinen portaali näkyviin editorin sijaintiin
+                GameObject otherPortal = isPortalAActive ? portalA : portalB;
+                otherPortal.SetActive(true);
+                StartCoroutine(ScalePortal(otherPortal)); // Skaalaa myös toinen portaali esiin
             }
 
             // Vaihda aktiivista portaalitilaa
