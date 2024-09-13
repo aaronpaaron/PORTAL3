@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PortalGun : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class PortalGun : MonoBehaviour
     public GameObject portalB; // Viittaa Portaali B:hen
 
     public float minimumPortalDistance = 3.0f; // Minimietäisyys portaalien välillä
+    public float scalingDuration = 0.5f; // Kuinka kauan skaalaus kestää
 
     private bool isPortalAActive = true; // Tarkistaa, kumpi portaali on aktiivinen
 
@@ -43,23 +45,92 @@ public class PortalGun : MonoBehaviour
                 return; // Estetään uuden portaalin sijoittaminen
             }
 
-            // Aseta portaalin sijainti ja rotaatio
-            if (isPortalAActive)
+            // Hanki aktiivinen portaali
+            GameObject activePortal = isPortalAActive ? portalB : portalA;
+
+            if (activePortal.activeInHierarchy)
             {
-                portalB.SetActive(true);
-                portalB.transform.position = hitPoint;
-                portalB.transform.rotation = CalculatePortalRotation(hitNormal);
+                // Skaalaa portaalin takaisin pieneksi ennen sen siirtämistä
+                StartCoroutine(ShrinkAndMovePortal(activePortal, hitPoint, hitNormal));
             }
             else
             {
-                portalA.SetActive(true);
-                portalA.transform.position = hitPoint;
-                portalA.transform.rotation = CalculatePortalRotation(hitNormal);
+                // Aseta portaalin sijainti ja rotaatio
+                activePortal.SetActive(true);
+                activePortal.transform.position = hitPoint;
+                activePortal.transform.rotation = CalculatePortalRotation(hitNormal);
+
+                // Skaalaa portaali nopeasti suureksi
+                StartCoroutine(ScalePortal(activePortal));
+            }
+
+            // Jos toista portaalia ei ole vielä luotu, luo se automaattisesti ensimmäisen jälkeen
+            if (!portalA.activeInHierarchy || !portalB.activeInHierarchy)
+            {
+                // Aseta toinen portaali näkyväksi jonnekin lähelle ensimmäistä portaalia
+                Vector3 offset = new Vector3(2, 0, 0); // Esimerkki siirrosta
+                if (isPortalAActive && !portalA.activeInHierarchy)
+                {
+                    portalA.SetActive(true);
+                    portalA.transform.position = hitPoint + offset;
+                    portalA.transform.rotation = CalculatePortalRotation(hitNormal);
+                    StartCoroutine(ScalePortal(portalA));
+                }
+                else if (!isPortalAActive && !portalB.activeInHierarchy)
+                {
+                    portalB.SetActive(true);
+                    portalB.transform.position = hitPoint + offset;
+                    portalB.transform.rotation = CalculatePortalRotation(hitNormal);
+                    StartCoroutine(ScalePortal(portalB));
+                }
             }
 
             // Vaihda aktiivista portaalitilaa
             isPortalAActive = !isPortalAActive;
         }
+    }
+
+    IEnumerator ShrinkAndMovePortal(GameObject portal, Vector3 newPosition, Vector3 newNormal)
+    {
+        // Skaalaa portaali takaisin pieneksi
+        Vector3 initialScale = portal.transform.localScale;
+        Vector3 targetScale = Vector3.zero;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < scalingDuration)
+        {
+            portal.transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsedTime / scalingDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        portal.transform.localScale = targetScale;
+
+        // Aseta uusi sijainti ja rotaatio
+        portal.transform.position = newPosition;
+        portal.transform.rotation = CalculatePortalRotation(newNormal);
+
+        // Skaalaa portaali nopeasti suureksi
+        StartCoroutine(ScalePortal(portal));
+    }
+
+    IEnumerator ScalePortal(GameObject portal)
+    {
+        Vector3 initialScale = Vector3.zero; // Portaali on aluksi pienikokoinen
+        Vector3 targetScale = Vector3.one; // Portaali kasvaa normaalikokoiseksi
+
+        portal.transform.localScale = initialScale;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < scalingDuration)
+        {
+            portal.transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsedTime / scalingDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        portal.transform.localScale = targetScale; // Varmista, että portaalin skaala on tarkka
     }
 
     bool IsTooCloseToOtherPortal(Vector3 hitPoint)

@@ -8,6 +8,7 @@ TagManager:
   - Portal
   - OtherPortal
   - GunHoldPos
+  - Portal2
   layers:
   - Default
   - TransparentFX
