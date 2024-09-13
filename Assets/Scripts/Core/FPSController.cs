@@ -11,9 +11,9 @@ public class FPSController : PortalTraveller {
     public float gravity = 18;
 
     public bool lockCursor;
-    public float mouseSensitivity = 10;
+    public float mouseSensitivity = 7;
     public Vector2 pitchMinMax = new Vector2 (-40, 85);
-    public float rotationSmoothTime = 0.1f;
+    public float rotationSmoothTime = 0.03f;
 
     CharacterController controller;
     Camera cam;

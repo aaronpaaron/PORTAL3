@@ -8,9 +8,11 @@ public class PortalGun : MonoBehaviour
 
     public float minimumPortalDistance = 3.0f; // Minimietäisyys portaalien välillä
     public float scalingDuration = 0.5f; // Kuinka kauan skaalaus kestää
+    public float fireDelay = 1.0f; // Ampumisviive portaalien luomiseen
 
     private bool isPortalAActive = true; // Tarkistaa, kumpi portaali on aktiivinen
     private bool hasFirstPortalPlaced = false; // Tarkistaa, onko ensimmäinen portaali asetettu
+    private float lastFireTime = 0f; // Aika, jolloin viimeisin ammunta tapahtui
 
     void Start()
     {
@@ -21,10 +23,14 @@ public class PortalGun : MonoBehaviour
 
     void Update()
     {
-        // Tarkistaa, onko hiiren vasen painike painettu
+        // Tarkistaa, onko hiiren vasen painike painettu ja onko kulunut tarpeeksi aikaa edellisestä ammunnasta
         if (Input.GetMouseButtonDown(0) && PickupPortalGun.equippedWeapon == PickupPortalGun.Weapon.PortalGun)
         {
-            HandlePortalSwitch();
+            if (Time.time - lastFireTime >= fireDelay)
+            {
+                lastFireTime = Time.time; // Päivitä viimeisin ammunta-aika
+                HandlePortalSwitch();
+            }
         }
     }
 

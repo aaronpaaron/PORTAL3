@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class BlockHover : MonoBehaviour
 {
@@ -7,10 +8,14 @@ public class BlockHover : MonoBehaviour
     public float smoothStopDuration = 0.5f; // Kuinka kauan palikan liikettä hidastetaan pysähtyessä
     public float hoverForce = 10f; // Voima, jolla palikka nostetaan
     public float hoverDamping = 0.95f; // Vaimentaa liikettä hoveroinnin aikana
+    public float portalForce = 7.5f; // Voima, jolla palikkaa työnnetään pois portaaleista
+    public float portalCooldown = 1.0f; // Viive ennen kuin triggerit aktivoituvat uudelleen
+    public float raycastDistance = 20f; // Etäisyys, kuinka kaukaa pelaaja voi "katsoa" palikkaa
 
     private Camera mainCamera;
     private Rigidbody rb;
     private bool isHovering = false;
+    private bool canTrigger = true; // Voi aktivoida triggerit aluksi
 
     void Start()
     {
@@ -24,11 +29,14 @@ public class BlockHover : MonoBehaviour
         {
             if (isHovering)
             {
-                StopHover();
+                StopHover(); // Palikan tiputtaminen on aina mahdollista
             }
             else
             {
-                StartHover();
+                if (IsLookingAtBlock()) // Varmista, että pelaaja katsoo palikkaa
+                {
+                    StartHover();
+                }
             }
         }
     }
@@ -39,6 +47,22 @@ public class BlockHover : MonoBehaviour
         {
             HoverAndFollowCamera();
         }
+    }
+
+    bool IsLookingAtBlock()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition); // Ammu ray pelaajan katselusuuntaan
+        RaycastHit hit;
+
+        // Tarkista osuuko ray tähän palikkaan ja onko etäisyys tarpeeksi lyhyt
+        if (Physics.Raycast(ray, out hit, raycastDistance))
+        {
+            if (hit.transform == transform) // Onko osuma tähän palikkaan
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void StartHover()
@@ -85,5 +109,49 @@ public class BlockHover : MonoBehaviour
 
         // Vaimennetaan myös y-akselin nopeutta, jotta se ei liikkuisi liikaa
         rb.velocity = new Vector3(rb.velocity.x * hoverDamping, rb.velocity.y * hoverDamping, rb.velocity.z * hoverDamping);
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        // Tarkista, voiko triggerit aktivoitua
+        if (canTrigger)
+        {
+            // Tarkista, onko triggeri Portal-objekti
+            if (collider.CompareTag("Portal"))
+            {
+                StopHover();
+
+                // Lasketaan voima sen mukaan, mistä suunnasta palikka osuu triggeriin
+                Vector3 hitNormal = collider.ClosestPointOnBounds(transform.position) - transform.position;
+                hitNormal.Normalize();
+
+                // Muutetaan voima triggerin tagin mukaan
+                Vector3 forceDirection = (collider.CompareTag("Portal2")) ? -hitNormal : hitNormal;
+                rb.AddForce(forceDirection * portalForce, ForceMode.VelocityChange);
+
+                StartCoroutine(PortalCooldown()); // Viiveen asetus
+            }
+
+            if (collider.CompareTag("Portal2"))
+            {
+                StopHover();
+
+                // Lasketaan voima sen mukaan, mistä suunnasta palikka osuu triggeriin
+                Vector3 hitNormal = collider.ClosestPointOnBounds(transform.position) - transform.position;
+                hitNormal.Normalize();
+
+                // Muutetaan voima triggerin tagin mukaan
+                Vector3 forceDirection = (collider.CompareTag("Portal2")) ? -hitNormal : hitNormal;
+                rb.AddForce(-forceDirection * portalForce, ForceMode.VelocityChange);
+            }
+        }
+    }
+
+    // Coroutine viiveelle, jotta triggerit aktivoituvat vain tietyn ajan kuluttua
+    IEnumerator PortalCooldown()
+    {
+        canTrigger = false; // Estä triggerit väliaikaisesti
+        yield return new WaitForSeconds(portalCooldown); // Viive
+        canTrigger = true; // Salli triggerit uudelleen
     }
 }
