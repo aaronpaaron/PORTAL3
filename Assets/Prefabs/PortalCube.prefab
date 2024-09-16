@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 233838288906551871}
   - component: {fileID: 6401892187229946393}
   - component: {fileID: 8894049384506842978}
+  - component: {fileID: 3297311128375866084}
   m_Layer: 0
   m_Name: PortalCube
   m_TagString: Untagged
@@ -133,3 +134,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3297311128375866084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213139190832807776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7b4cef4bd496d499dd8099bfdde236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverHeight: 2
+  followSpeed: 5
+  smoothStopDuration: 0.5
+  hoverForce: 10
+  hoverDamping: 0.95
+  portalForce: 7.5
+  portalCooldown: 1
+  raycastDistance: 20
