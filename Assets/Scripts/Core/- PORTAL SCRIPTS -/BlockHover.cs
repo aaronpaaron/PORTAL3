@@ -11,7 +11,7 @@ public class BlockHover : MonoBehaviour
     public float portalForce = 10f; // Voima, jolla palikkaa työnnetään pois portaaleista
     public float portalCooldown = 1.0f; // Viive ennen kuin triggerit aktivoituvat uudelleen
     public float raycastDistance = 20f; // Etäisyys, kuinka kaukaa pelaaja voi "katsoa" palikkaa
-    public float shootForce = 10f; // Voima, jolla palikkaa ammuttavat eteenpäin
+    public float shootForce = 7f; // Voima, jolla palikkaa ammuttavat eteenpäin
 
     private Camera mainCamera;
     private Rigidbody rb;
