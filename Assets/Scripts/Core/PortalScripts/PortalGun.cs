@@ -7,7 +7,7 @@ public class PortalGun : MonoBehaviour
     public GameObject portalB; // Viittaa Portaali B:hen
 
     public float minimumPortalDistance = 3.0f; // Minimietäisyys portaalien välillä
-    public float scalingDuration = 0.5f; // Kuinka kauan skaalaus kestää
+    public float scalingDuration = 100.0f; // Kuinka kauan skaalaus kestää
     public float fireDelay = 1.0f; // Ampumisviive portaalien luomiseen
 
     private bool isPortalAActive = true; // Tarkistaa, kumpi portaali on aktiivinen
@@ -42,48 +42,56 @@ public class PortalGun : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Vector3 hitPoint = hit.point;
-            Vector3 hitNormal = hit.normal;
-
-            // Tarkista, onko uusi portaali liian lähellä toista
-            if (IsTooCloseToOtherPortal(hitPoint))
+            // Tarkista, onko osuma ShootableWall-tägillä merkityllä objektilla
+            if (hit.collider.CompareTag("ShootableWall"))
             {
-                Debug.Log("Portaalia ei voi asettaa liian lähelle toista portaalia.");
-                return; // Estetään uuden portaalin sijoittaminen
-            }
+                Vector3 hitPoint = hit.point;
+                Vector3 hitNormal = hit.normal;
 
-            // Hanki aktiivinen portaali
-            GameObject activePortal = isPortalAActive ? portalB : portalA;
+                // Tarkista, onko uusi portaali liian lähellä toista
+                if (IsTooCloseToOtherPortal(hitPoint))
+                {
+                    Debug.Log("Portaalia ei voi asettaa liian lähelle toista portaalia.");
+                    return; // Estetään uuden portaalin sijoittaminen
+                }
 
-            if (activePortal.activeInHierarchy)
-            {
-                // Skaalaa portaalin takaisin pieneksi ennen sen siirtämistä
-                StartCoroutine(ShrinkAndMovePortal(activePortal, hitPoint, hitNormal));
+                // Hanki aktiivinen portaali
+                GameObject activePortal = isPortalAActive ? portalB : portalA;
+
+                if (activePortal.activeInHierarchy)
+                {
+                    // Skaalaa portaalin takaisin pieneksi ennen sen siirtämistä
+                    StartCoroutine(ShrinkAndMovePortal(activePortal, hitPoint, hitNormal));
+                }
+                else
+                {
+                    // Aseta portaalin sijainti ja rotaatio
+                    activePortal.SetActive(true);
+                    activePortal.transform.position = hitPoint;
+                    activePortal.transform.rotation = CalculatePortalRotation(hitNormal);
+
+                    // Skaalaa portaali nopeasti suureksi
+                    StartCoroutine(ScalePortal(activePortal));
+                }
+
+                // Jos tämä on ensimmäinen portaali, asetetaan toinen portaali editorin sijaintiin
+                if (!hasFirstPortalPlaced)
+                {
+                    hasFirstPortalPlaced = true;
+
+                    // Aseta toinen portaali näkyviin editorin sijaintiin
+                    GameObject otherPortal = isPortalAActive ? portalA : portalB;
+                    otherPortal.SetActive(true);
+                    StartCoroutine(ScalePortal(otherPortal)); // Skaalaa myös toinen portaali esiin
+                }
+
+                // Vaihda aktiivista portaalitilaa
+                isPortalAActive = !isPortalAActive;
             }
             else
             {
-                // Aseta portaalin sijainti ja rotaatio
-                activePortal.SetActive(true);
-                activePortal.transform.position = hitPoint;
-                activePortal.transform.rotation = CalculatePortalRotation(hitNormal);
-
-                // Skaalaa portaali nopeasti suureksi
-                StartCoroutine(ScalePortal(activePortal));
+                Debug.Log("Ei voi asettaa portaalin siihen objektiin. Objekti ei ole ShootableWall.");
             }
-
-            // Jos tämä on ensimmäinen portaali, asetetaan toinen portaali editorin sijaintiin
-            if (!hasFirstPortalPlaced)
-            {
-                hasFirstPortalPlaced = true;
-
-                // Aseta toinen portaali näkyviin editorin sijaintiin
-                GameObject otherPortal = isPortalAActive ? portalA : portalB;
-                otherPortal.SetActive(true);
-                StartCoroutine(ScalePortal(otherPortal)); // Skaalaa myös toinen portaali esiin
-            }
-
-            // Vaihda aktiivista portaalitilaa
-            isPortalAActive = !isPortalAActive;
         }
     }
 

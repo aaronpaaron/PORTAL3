@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4521286788030471892}
   - component: {fileID: 395122661988458031}
   - component: {fileID: 9098004899480069602}
-  - component: {fileID: 7884394079630439168}
+  - component: {fileID: 2535221435337641316}
   m_Layer: 3
   m_Name: Portal Gun
   m_TagString: Untagged
@@ -30,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558933902254505877}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.591733, y: -0, z: -0, w: 0.80613405}
-  m_LocalPosition: {x: 0.32, y: 3.01, z: -5.17}
-  m_LocalScale: {x: 0.39339402, y: 0.39339402, z: 0.39339402}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.003954003, y: 0.003954003, z: 0.003954003}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 72.56, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2552191043722925588
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558933902254505877}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 8429572186694111776, guid: f93f603725976ed45979150063f14c32, type: 3}
 --- !u!23 &3604841489480218679
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &7884394079630439168
+--- !u!136 &2535221435337641316
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,7 +162,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2.2772994
+  m_Radius: 78.4111
+  m_Height: 35.6818
   m_Direction: 1
-  m_Center: {x: 0.00000007575693, y: -0.0046893535, z: -0.00000007563869}
+  m_Center: {x: 0, y: 0, z: 0}
