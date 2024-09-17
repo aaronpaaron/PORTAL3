@@ -12,6 +12,7 @@ TagManager:
   - Door
   - ShootableWall
   - Cube
+  - PortalGun
   layers:
   - Default
   - TransparentFX

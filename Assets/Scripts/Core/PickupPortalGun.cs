@@ -9,6 +9,8 @@ public class PickupPortalGun : MonoBehaviour
 
     public static Weapon equippedWeapon = Weapon.None;
 
+    public Animator animator;
+
     public bool isPickedUp = false;
 
     void Start()
@@ -18,6 +20,7 @@ public class PickupPortalGun : MonoBehaviour
         
         player = GameObject.FindWithTag("Player"); // Pelaaja-objekti
         gunHoldPosition = GameObject.FindWithTag("GunHoldPos").transform;
+        animator = GameObject.FindWithTag("PortalGun").GetComponent<Animator>();
         equippedWeapon = Weapon.None;
     }
 
@@ -35,6 +38,8 @@ public class PickupPortalGun : MonoBehaviour
         isPickedUp = true;
         Debug.Log("Picked up Portal Gun");
         equippedWeapon = Weapon.PortalGun;
+
+        animator.SetTrigger("isPickedUp");
 
         // Kytke ase pois näkyvistä sen alkuperäisessä sijainnissa
         gameObject.SetActive(false);

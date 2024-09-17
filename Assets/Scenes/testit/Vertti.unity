@@ -191,6 +191,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 3297311128375866084, guid: 6e36af14c244bb541956cc9a5e927605, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 8481131655626193607, guid: c1186dbe3caba824f9ed96dad20dc5bd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1400,13 +1404,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Block
       objectReference: {fileID: 0}
+    - target: {fileID: 3297311128375866084, guid: 6e36af14c244bb541956cc9a5e927605, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 8481131655626193607, guid: c1186dbe3caba824f9ed96dad20dc5bd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3213139190832807776, guid: 6e36af14c244bb541956cc9a5e927605, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1294806401}
     - targetCorrespondingSourceObject: {fileID: 3213139190832807776, guid: 6e36af14c244bb541956cc9a5e927605, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1294806402}
@@ -1416,27 +1421,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3213139190832807776, guid: 6e36af14c244bb541956cc9a5e927605, type: 3}
   m_PrefabInstance: {fileID: 1294806394}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1294806401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294806395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e7b4cef4bd496d499dd8099bfdde236, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverHeight: 2
-  followSpeed: 5
-  smoothStopDuration: 0.5
-  hoverForce: 10
-  hoverDamping: 0.95
-  portalForce: 5
-  portalCooldown: 1
-  raycastDistance: 10
-  shootForce: 5
 --- !u!114 &1294806402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1620,6 +1604,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1535381019623673787, guid: 5101aee443b6c4e028aae23d799c5fa4, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 8481131655626193607, guid: c1186dbe3caba824f9ed96dad20dc5bd, type: 3}
+    - target: {fileID: 1535381019623673787, guid: 5101aee443b6c4e028aae23d799c5fa4, type: 3}
       propertyPath: runSpeed
       value: 6
       objectReference: {fileID: 0}
@@ -1782,13 +1770,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564016874}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0.014191619, y: 0.014191619, z: -0.7069644, w: 0.7069644}
   m_LocalPosition: {x: 0.31, y: -0.25, z: 0.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 893752228}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 2.3, y: 0, z: -90}
 --- !u!1 &1576572716
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,6 +2162,7 @@ MonoBehaviour:
   minimumPortalDistance: 3
   scalingDuration: 0.5
   fireDelay: 1
+  animator: {fileID: 8481131655626193607, guid: c1186dbe3caba824f9ed96dad20dc5bd, type: 3}
 --- !u!1 &2120847631
 GameObject:
   m_ObjectHideFlags: 0

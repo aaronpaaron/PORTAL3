@@ -14,6 +14,8 @@ public class PortalGun : MonoBehaviour
     private bool hasFirstPortalPlaced = false; // Tarkistaa, onko ensimmäinen portaali asetettu
     private float lastFireTime = 0f; // Aika, jolloin viimeisin ammunta tapahtui
 
+    public Animator animator;
+
     void Start()
     {
         // Piilota molemmat portaalit aluksi
@@ -57,6 +59,8 @@ public class PortalGun : MonoBehaviour
 
                 // Hanki aktiivinen portaali
                 GameObject activePortal = isPortalAActive ? portalB : portalA;
+                
+                animator.SetTrigger("Shoot");
 
                 if (activePortal.activeInHierarchy)
                 {

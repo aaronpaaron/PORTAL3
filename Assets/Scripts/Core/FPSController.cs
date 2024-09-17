@@ -30,6 +30,8 @@ public class FPSController : PortalTraveller {
     Vector3 rotationSmoothVelocity;
     Vector3 currentRotation;
 
+    public Animator animator;
+
     bool jumping;
     float lastGroundedTime;
     bool disabled;
@@ -88,6 +90,9 @@ public class FPSController : PortalTraveller {
             float timeSinceLastTouchedGround = Time.time - lastGroundedTime;
             if (controller.isGrounded || (!jumping && timeSinceLastTouchedGround < 0.15f)) {
                 jumping = true;
+                
+                animator.SetTrigger("isJumping");
+                
                 verticalVelocity = jumpForce;
             }
         }

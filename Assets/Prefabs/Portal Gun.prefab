@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 395122661988458031}
   - component: {fileID: 9098004899480069602}
   - component: {fileID: 2535221435337641316}
+  - component: {fileID: 8481131655626193607}
   m_Layer: 3
   m_Name: Portal Gun
-  m_TagString: Untagged
+  m_TagString: PortalGun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   gunHoldPosition: {fileID: 0}
+  animator: {fileID: 8481131655626193607}
   isPickedUp: 0
 --- !u!54 &9098004899480069602
 Rigidbody:
@@ -166,3 +168,24 @@ CapsuleCollider:
   m_Height: 35.6818
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &8481131655626193607
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558933902254505877}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5c49f7ce8135b8c48bc579a3f9ee2599, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

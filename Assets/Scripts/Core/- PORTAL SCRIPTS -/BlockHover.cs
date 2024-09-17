@@ -18,6 +18,8 @@ public class BlockHover : MonoBehaviour
     private bool isHovering = false;
     private bool canTrigger = true; // Voi aktivoida triggerit aluksi
 
+    public Animator animator;
+
     void Start()
     {
         mainCamera = Camera.main; // Hanki pääkamera
@@ -76,6 +78,8 @@ public class BlockHover : MonoBehaviour
         if (!isHovering)
         {
             isHovering = true;
+
+            animator.SetTrigger("Hovering");
 
             // Poista gravitaatio hoveroinnin ajaksi
             rb.useGravity = false;
