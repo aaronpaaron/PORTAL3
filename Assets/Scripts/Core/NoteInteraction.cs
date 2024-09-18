@@ -1,73 +1,71 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
-public class NoteInteraction : MonoBehaviour
+public class NoteInteractionWithRaycast : MonoBehaviour
 {
-    public float interactDistance = 3f;       // Distance to detect the note
-    public LayerMask noteLayer;               // Layer for the note object
-    public Text interactText;                 // UI Text: "Press E to read"
-    public GameObject noteUIPanel;            // UI Panel showing the note
-    private bool isReading = false;           // Whether the player is reading the note
+    public float interactDistance = 3f;        // Distance to detect the note
+    public LayerMask noteLayer;                // Layer for the note object
+    public TextMeshProUGUI interactText;                  // UI Text: "Press E to read"
+    public GameObject noteUIPanel;             // UI Panel showing the note
+    public MonoBehaviour playerMovement;       // Reference to player movement script (e.g., FPSController)
+    private bool isReading = false;
 
     void Update()
     {
-        // Raycast to detect if the player is looking at the note
+        // Raycast from the camera's position
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, interactDistance, noteLayer))
-        {
-            // Show "Press E to read" text when looking at the note
-            interactText.gameObject.SetActive(true);
 
-            // If the player presses "E" to interact with the note
-            if (Input.GetKeyDown(KeyCode.E))
+        // If raycast hits the note within distance
+        if (Physics.Raycast(ray, out hit, interactDistance, noteLayer))
+        {
+            interactText.gameObject.SetActive(true);  // Show "Press E to read" UI
+
+            if (Input.GetKeyDown(KeyCode.E))  // When "E" is pressed
             {
                 if (!isReading)
                 {
-                    // Start reading the note
-                    ShowNote();
+                    ShowNote();  // Show the note
                 }
                 else
                 {
-                    // Stop reading the note
-                    HideNote();
+                    HideNote();  // Hide the note
                 }
             }
         }
         else
         {
-            // Hide the "Press E to read" text if not looking at the note
-            interactText.gameObject.SetActive(false);
+            interactText.gameObject.SetActive(false);  // Hide the interact UI if not looking at the note
         }
     }
 
     void ShowNote()
     {
-        // Show the note on the screen
         noteUIPanel.SetActive(true);
         interactText.gameObject.SetActive(false);
-        
-        // Freeze the game by setting timeScale to 0
-        Time.timeScale = 0;
-        
-        // Make sure the cursor is unlocked so the player can interact with the UI
+        Time.timeScale = 0;  // Freeze the game
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        
+
+        // Disable player movement and camera control
+        playerMovement.enabled = false;
+
         isReading = true;
+        Debug.Log("Showing the note");
     }
 
     void HideNote()
     {
-        // Hide the note from the screen
         noteUIPanel.SetActive(false);
-        
-        // Resume the game by setting timeScale back to 1
-        Time.timeScale = 1;
-        
-        // Lock the cursor again for FPS movement
+        Time.timeScale = 1;  // Unfreeze the game
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
+        // Re-enable player movement and camera control
+        playerMovement.enabled = true;
+
         isReading = false;
+        Debug.Log("Hiding the note");
     }
 }
