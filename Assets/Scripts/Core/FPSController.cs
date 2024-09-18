@@ -129,4 +129,9 @@ public class FPSController : PortalTraveller {
         Physics.SyncTransforms ();
     }
 
+
+    public void SetGunAnimatorComponent(Animator gunAnimator)
+    {
+        animator = gunAnimator;
+    }
 }

@@ -21,7 +21,8 @@ public class PortalGunSpawner : MonoBehaviour
         if (itemToSpawn != null && spawnPosition != null)
         {
             // Instansioidaan objekti spawnPositioniin
-            Instantiate(itemToSpawn, spawnPosition.position, spawnPosition.rotation);
+            GameObject spawnedGun = Instantiate(itemToSpawn, spawnPosition.position, spawnPosition.rotation);
+            spawnedGun.name = itemToSpawn.name;
             hasSpawned = true; // Ase on nyt spawnattu
         }
         else

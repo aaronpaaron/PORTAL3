@@ -39,6 +39,7 @@ public class PickupPortalGun : MonoBehaviour
         Debug.Log("Picked up Portal Gun");
         equippedWeapon = Weapon.PortalGun;
 
+        player.GetComponent<FPSController>().SetGunAnimatorComponent(animator);
         animator.SetTrigger("isPickedUp");
 
         // Kytke ase pois näkyvistä sen alkuperäisessä sijainnissa
@@ -46,6 +47,7 @@ public class PickupPortalGun : MonoBehaviour
 
         // Kiinnitä ase pelaajan käteen
         transform.SetParent(gunHoldPosition);
+        animator.Rebind();
 
         // Aseta ase gunHoldPositionin kohdalle ja suunnalle
         transform.localPosition = Vector3.zero;
