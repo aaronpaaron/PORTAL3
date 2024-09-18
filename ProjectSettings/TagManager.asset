@@ -10,6 +10,9 @@ TagManager:
   - GunHoldPos
   - Portal2
   - Door
+  - ShootableWall
+  - Cube
+  - PortalGun
   layers:
   - Default
   - TransparentFX

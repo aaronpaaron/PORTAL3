@@ -8,14 +8,17 @@ public class BlockHover : MonoBehaviour
     public float smoothStopDuration = 0.5f; // Kuinka kauan palikan liikettä hidastetaan pysähtyessä
     public float hoverForce = 10f; // Voima, jolla palikka nostetaan
     public float hoverDamping = 0.95f; // Vaimentaa liikettä hoveroinnin aikana
-    public float portalForce = 7.5f; // Voima, jolla palikkaa työnnetään pois portaaleista
+    public float portalForce = 10f; // Voima, jolla palikkaa työnnetään pois portaaleista
     public float portalCooldown = 1.0f; // Viive ennen kuin triggerit aktivoituvat uudelleen
     public float raycastDistance = 20f; // Etäisyys, kuinka kaukaa pelaaja voi "katsoa" palikkaa
+    public float shootForce = 7f; // Voima, jolla palikkaa ammuttavat eteenpäin
 
     private Camera mainCamera;
     private Rigidbody rb;
     private bool isHovering = false;
     private bool canTrigger = true; // Voi aktivoida triggerit aluksi
+
+    public Animator animator;
 
     void Start()
     {
@@ -38,6 +41,11 @@ public class BlockHover : MonoBehaviour
                     StartHover();
                 }
             }
+        }
+
+        if (Input.GetMouseButtonDown(2) && isHovering) // Keskimmäinen hiirinäppäin
+        {
+            ShootBlock();
         }
     }
 
@@ -70,6 +78,8 @@ public class BlockHover : MonoBehaviour
         if (!isHovering)
         {
             isHovering = true;
+
+            animator.SetTrigger("Hovering");
 
             // Poista gravitaatio hoveroinnin ajaksi
             rb.useGravity = false;
@@ -109,6 +119,16 @@ public class BlockHover : MonoBehaviour
 
         // Vaimennetaan myös y-akselin nopeutta, jotta se ei liikkuisi liikaa
         rb.velocity = new Vector3(rb.velocity.x * hoverDamping, rb.velocity.y * hoverDamping, rb.velocity.z * hoverDamping);
+    }
+
+    void ShootBlock()
+    {
+        // Poista hoverointi ja vapauta gravitaatio
+        StopHover();
+
+        // Laske voima, jolla palikkaa ammutaan
+        Vector3 shootDirection = mainCamera.transform.forward;
+        rb.AddForce(shootDirection * shootForce, ForceMode.VelocityChange);
     }
 
     void OnTriggerEnter(Collider collider)
