@@ -20,8 +20,6 @@ public class PickupPortalGun : MonoBehaviour
         
         player = GameObject.FindWithTag("Player"); // Pelaaja-objekti
         gunHoldPosition = GameObject.FindWithTag("GunHoldPos").transform;
-        animator = GameObject.FindWithTag("PortalGun").GetComponent<Animator>();
-        animator.Rebind();
         equippedWeapon = Weapon.None;
     }
 
@@ -40,8 +38,10 @@ public class PickupPortalGun : MonoBehaviour
         Debug.Log("Picked up Portal Gun");
         equippedWeapon = Weapon.PortalGun;
 
-        player.GetComponent<FPSController>().SetGunAnimatorComponent(animator);
-        animator.SetTrigger("isPickedUp");
+        // player.GetComponent<FPSController>().SetGunAnimatorComponent(animator);
+        
+        animator = GameObject.FindWithTag("PortalGun").GetComponent<Animator>();
+        animator.Rebind();
 
         // Kytke ase pois näkyvistä sen alkuperäisessä sijainnissa
         gameObject.SetActive(false);
@@ -55,6 +55,7 @@ public class PickupPortalGun : MonoBehaviour
 
         // Kytke ase takaisin näkyviin pelaajan kädessä
         gameObject.SetActive(true);
+        animator.SetTrigger("isPickedUp");
     }
 
     void LateUpdate() // Käytetään LateUpdatea varmistamaan, että kamera on jo liikkunut ennen kuin ase asetetaan

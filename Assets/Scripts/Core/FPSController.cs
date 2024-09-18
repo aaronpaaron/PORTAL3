@@ -32,6 +32,8 @@ public class FPSController : PortalTraveller {
 
     public Animator animator;
 
+    PickupPortalGun pickupPortalGun;
+
     bool jumping;
     float lastGroundedTime;
     bool disabled;
@@ -91,7 +93,12 @@ public class FPSController : PortalTraveller {
             if (controller.isGrounded || (!jumping && timeSinceLastTouchedGround < 0.15f)) {
                 jumping = true;
                 
-                animator.SetTrigger("isJumping");
+                if(PickupPortalGun.equippedWeapon == PickupPortalGun.Weapon.PortalGun)
+                {
+                    animator = GameObject.FindWithTag("PortalGun").GetComponent<Animator>();
+                    animator.Rebind();
+                    animator.SetTrigger("isJumping");
+                }
                 
                 verticalVelocity = jumpForce;
             }

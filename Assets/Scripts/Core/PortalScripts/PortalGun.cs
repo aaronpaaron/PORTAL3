@@ -60,6 +60,8 @@ public class PortalGun : MonoBehaviour
                 // Hanki aktiivinen portaali
                 GameObject activePortal = isPortalAActive ? portalB : portalA;
                 
+                animator = GameObject.FindWithTag("PortalGun").GetComponent<Animator>();
+                animator.Rebind();
                 animator.SetTrigger("Shoot");
 
                 if (activePortal.activeInHierarchy)

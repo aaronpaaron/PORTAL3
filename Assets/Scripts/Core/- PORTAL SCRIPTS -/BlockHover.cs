@@ -28,7 +28,7 @@ public class BlockHover : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) // Oikea hiirinäppäin
+        if (Input.GetMouseButtonDown(1) && PickupPortalGun.equippedWeapon == PickupPortalGun.Weapon.PortalGun) // Oikea hiirinäppäin
         {
             if (isHovering)
             {
@@ -78,6 +78,8 @@ public class BlockHover : MonoBehaviour
         if (!isHovering)
         {
             isHovering = true;
+            animator = GameObject.FindWithTag("PortalGun").GetComponent<Animator>();
+            animator.Rebind();
 
             animator.SetTrigger("Hovering");
 
