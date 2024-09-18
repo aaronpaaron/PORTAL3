@@ -684,16 +684,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436112413}
-  m_LocalRotation: {x: -0.5077939, y: -0.49208272, z: -0.49208272, w: 0.5077939}
-  m_LocalPosition: {x: 0, y: 0, z: 1.2}
-  m_LocalScale: {x: 0.75008, y: 0.00001, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 1.119}
+  m_LocalScale: {x: 0.5, y: 0.000006849315, z: 0.6849315}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -88.2}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.15, y: 1.547}
+  m_AnchoredPosition: {x: -5.189, y: 1.65}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &436112418
@@ -1384,6 +1384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoteCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8030477449321334554, guid: 36b76724b8053694b9ddb149de30d945, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1d70f8ba5eda59b42880957b1a963f6e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
