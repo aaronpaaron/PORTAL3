@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 436848862}
-  m_IndirectSpecularColor: {r: 0.22479096, g: 0.25129846, b: 0.3219795, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -745,7 +745,6 @@ GameObject:
   - component: {fileID: 1173030538}
   - component: {fileID: 1173030541}
   - component: {fileID: 1173030540}
-  - component: {fileID: 1173030542}
   - component: {fileID: 1173030539}
   m_Layer: 0
   m_Name: Cube (6)
@@ -840,21 +839,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1173030537}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1173030542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173030537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf0e39b1a73d9a489a74e57eec8ce93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tiling: {x: 2.6, y: 8.1}
-  offset: {x: 0, y: 0}
-  pixelationAmount: 100
 --- !u!1 &1206549853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,6 +1710,10 @@ PrefabInstance:
     - target: {fileID: 3301794330275531545, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645680124349752255, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6375389434114746568, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: portalA
