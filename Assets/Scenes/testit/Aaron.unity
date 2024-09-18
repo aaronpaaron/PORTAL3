@@ -179,33 +179,13 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1535381019623673784, guid: 5101aee443b6c4e028aae23d799c5fa4, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 1535381020191089684, guid: 5101aee443b6c4e028aae23d799c5fa4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 38850806}
+      addedObject: {fileID: 1880686900}
+    - targetCorrespondingSourceObject: {fileID: 1535381020191089684, guid: 5101aee443b6c4e028aae23d799c5fa4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1880686901}
   m_SourcePrefab: {fileID: 100100000, guid: 5101aee443b6c4e028aae23d799c5fa4, type: 3}
---- !u!1 &38850805 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1535381019623673784, guid: 5101aee443b6c4e028aae23d799c5fa4, type: 3}
-  m_PrefabInstance: {fileID: 38850804}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &38850806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38850805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df4ca87bdef6fe9448ccdd0b8fd0cd86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactDistance: 3
-  noteLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  interactText: {fileID: 0}
-  noteUIPanel: {fileID: 0}
 --- !u!1 &120242567
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +415,7 @@ GameObject:
   - component: {fileID: 560044866}
   - component: {fileID: 560044865}
   m_Layer: 5
-  m_Name: PressEto
+  m_Name: Press E to read
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -674,7 +654,6 @@ GameObject:
   - component: {fileID: 650690298}
   - component: {fileID: 650690297}
   - component: {fileID: 650690296}
-  - component: {fileID: 650690294}
   m_Layer: 7
   m_Name: Note
   m_TagString: Untagged
@@ -682,27 +661,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &650690294
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650690293}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &650690296
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -722,7 +680,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.05, y: 4, z: 1.05}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &650690297
 MeshRenderer:
@@ -783,7 +741,7 @@ Transform:
   m_GameObject: {fileID: 650690293}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.29, y: 0.1, z: 4.03}
+  m_LocalPosition: {x: -3.29, y: 0.526, z: 4.03}
   m_LocalScale: {x: 1, y: 0.008, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1503,6 +1461,45 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613498004}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1880686895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1535381020191089684, guid: 5101aee443b6c4e028aae23d799c5fa4, type: 3}
+  m_PrefabInstance: {fileID: 38850804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1880686900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880686895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df4ca87bdef6fe9448ccdd0b8fd0cd86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactDistance: 5
+  noteLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  interactText: {fileID: 560044865}
+  noteUIPanel: {fileID: 1145091582}
+--- !u!114 &1880686901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880686895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a99c8dcd8284a429fff97a5f01eba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactDistance: 3
+  noteLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1885804257
 GameObject:
   m_ObjectHideFlags: 0
