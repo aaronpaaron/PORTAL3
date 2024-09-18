@@ -21,6 +21,7 @@ public class PickupPortalGun : MonoBehaviour
         player = GameObject.FindWithTag("Player"); // Pelaaja-objekti
         gunHoldPosition = GameObject.FindWithTag("GunHoldPos").transform;
         animator = GameObject.FindWithTag("PortalGun").GetComponent<Animator>();
+        animator.Rebind();
         equippedWeapon = Weapon.None;
     }
 
@@ -47,7 +48,6 @@ public class PickupPortalGun : MonoBehaviour
 
         // Kiinnitä ase pelaajan käteen
         transform.SetParent(gunHoldPosition);
-        animator.Rebind();
 
         // Aseta ase gunHoldPositionin kohdalle ja suunnalle
         transform.localPosition = Vector3.zero;
@@ -62,8 +62,8 @@ public class PickupPortalGun : MonoBehaviour
         if (isPickedUp)
         {
             // Päivitä aseen sijainti ja rotaatio suhteessa pelaajan kameraan
-            transform.position = gunHoldPosition.position;
-            transform.rotation = gunHoldPosition.rotation;
+            //transform.position = gunHoldPosition.position;
+            //transform.rotation = gunHoldPosition.rotation;
         }
     }
 
