@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class KillFloor : MonoBehaviour
 {
-   [SerializeField] private Transform player;
-   [SerializeField] private Transform respawn_point;
-
-   private void OnTriggerEnter(Collider other)
+   public Transform respawnPoint;
+   private void OnTriggerEnter (Collider other)
    {
-      player.transform.position = respawn_point.transform.position;
+      if (other.CompareTag("Player"))
+      {
+         other.GetComponent<PlayerRespawn>().RespawnAt(respawnPoint);
+      }
    }
 }
+
