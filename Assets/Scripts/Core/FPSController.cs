@@ -11,7 +11,7 @@ public class FPSController : PortalTraveller {
     public float gravity = 18;
 
     public bool lockCursor;
-    public float mouseSensitivity = 7;
+    public float mouseSensitivity = 5;
     public Vector2 pitchMinMax = new Vector2 (-40, 85);
     public float rotationSmoothTime = 0.03f;
 
@@ -106,13 +106,6 @@ public class FPSController : PortalTraveller {
 
         float mX = Input.GetAxisRaw ("Mouse X");
         float mY = Input.GetAxisRaw ("Mouse Y");
-
-        // Verrrrrry gross hack to stop camera swinging down at start
-        float mMag = Mathf.Sqrt (mX * mX + mY * mY);
-        if (mMag > 5) {
-            mX = 0;
-            mY = 0;
-        }
 
         yaw += mX * mouseSensitivity;
         pitch -= mY * mouseSensitivity;
