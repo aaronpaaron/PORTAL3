@@ -5985,7 +5985,7 @@ GameObject:
   - component: {fileID: 336800974}
   m_Layer: 0
   m_Name: Cube (158)
-  m_TagString: Untagged
+  m_TagString: ShootableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20766,7 +20766,7 @@ GameObject:
   - component: {fileID: 1262957817}
   m_Layer: 0
   m_Name: Cube (127)
-  m_TagString: Untagged
+  m_TagString: ShootableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21873,7 +21873,7 @@ GameObject:
   - component: {fileID: 1382310684}
   m_Layer: 0
   m_Name: Cube (128)
-  m_TagString: Untagged
+  m_TagString: ShootableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31468,7 +31468,7 @@ GameObject:
   - component: {fileID: 2030166349}
   m_Layer: 0
   m_Name: Cube (159)
-  m_TagString: Untagged
+  m_TagString: ShootableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
