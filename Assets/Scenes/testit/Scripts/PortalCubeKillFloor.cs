@@ -9,7 +9,7 @@ public class PortalCubeKillFloor : MonoBehaviour
    {
       if (other.CompareTag("Cube"))
       {
-         other.GetComponent<PlayerRespawn>().RespawnAt(respawnPoint);
+         other.GetComponent<BlockRespawn>().Respawn(respawnPoint);
       }
    }
 }
