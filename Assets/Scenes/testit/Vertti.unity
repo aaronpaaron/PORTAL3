@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 666084052}
   - component: {fileID: 666084051}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: FakeLight
   m_TagString: ShootableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
