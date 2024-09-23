@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 24523296411913952}
   - component: {fileID: 5081910265783525546}
   - component: {fileID: 1504733911492280951}
-  - component: {fileID: 5844671058464239269}
   - component: {fileID: 7294584092208206517}
   m_Layer: 0
   m_Name: PortalBall
@@ -107,18 +106,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5844671058464239269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4615110326710482891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8be2e2cc9bf7f46ab6f2ebe8f5d433, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &7294584092208206517
 Rigidbody:
   m_ObjectHideFlags: 0
