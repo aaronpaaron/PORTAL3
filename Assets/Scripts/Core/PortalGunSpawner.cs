@@ -7,10 +7,10 @@ public class PortalGunSpawner : MonoBehaviour
 
     private bool hasSpawned = false; // Tarkistaa, onko ase jo spawnattu
 
-    void Update()
+    void Start()
     {
         // Tarkistetaan, onko pelaaja painanut Q-näppäintä ja onko ase vielä spawnattu
-        if (Input.GetKeyDown(KeyCode.Q) && !hasSpawned)
+        if (!hasSpawned)
         {
             SpawnItem();
         }
