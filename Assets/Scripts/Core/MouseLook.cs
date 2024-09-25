@@ -11,7 +11,7 @@ public class MouseLook : MonoBehaviour
     float xRotation = 0f;
     void Start()
     {
-        mouseSensitivity = PlayerPrefs.GetFloat("currentSensitivity", 100);
+        mouseSensitivity = PlayerPrefs.GetFloat("currentSensitivity", 100f);
         slider.value = mouseSensitivity/10;
         Cursor.lockState = CursorLockMode.Locked;
     }
