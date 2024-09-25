@@ -41,11 +41,11 @@ public class PortalGun : MonoBehaviour
         }
 
         // Lisää AudioSource komponentit portaaleille
-        portalASource = portalA.AddComponent<AudioSource>();
+        portalASource = portalA.GetComponent<AudioSource>();
         portalASource.clip = portalLoopSFX;
         portalASource.loop = true; // Aseta loopiksi
 
-        portalBSource = portalB.AddComponent<AudioSource>();
+        portalBSource = portalB.GetComponent<AudioSource>();
         portalBSource.clip = portalLoopSFX;
         portalBSource.loop = true; // Aseta loopiksi
     }
@@ -151,10 +151,7 @@ public class PortalGun : MonoBehaviour
     // Funktio epäonnistuneen äänen toistamiselle
     void PlayPortalFailSound()
     {
-        if (portalFailSFX != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(portalFailSFX); // Soita epäonnistumisääni kerran
-        }
+        audioSource.PlayOneShot(portalFailSFX); // Soita epäonnistumisääni kerran
     }
 
     void StartLoopingPortalSound(GameObject portal)

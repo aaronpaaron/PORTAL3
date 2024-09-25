@@ -11,7 +11,7 @@ public class FPSController : PortalTraveller {
 
     public bool lockCursor;
     public float mouseSensitivity = 5;
-    public Vector2 pitchMinMax = new Vector2 (-40, 85);
+    public Vector2 pitchMinMax = new Vector2(-40, 85);
     public float rotationSmoothTime = 0.03f;
 
     CharacterController controller;
@@ -38,7 +38,10 @@ public class FPSController : PortalTraveller {
     // Äänen toistamiseen tarvittavat muuttujat
     public AudioClip walkSound; // Kävelyääni
     public AudioClip runSound;  // Juoksuääni
-    private AudioSource audioSource; // AudioSource-komponentti
+
+    // Äänien hallintaan liittyvät muuttujat
+    private AudioSource walkAudioSource; // AudioSource kävelyääneelle
+    private AudioSource runAudioSource;  // AudioSource juoksuääneelle
 
     void Start () {
         cam = Camera.main;
@@ -54,20 +57,23 @@ public class FPSController : PortalTraveller {
         smoothYaw = yaw;
         smoothPitch = pitch;
 
-        // Hanki AudioSource
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null) {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
+        // Luo AudioSource-komponentit kävely- ja juoksuäänille
+        walkAudioSource = gameObject.AddComponent<AudioSource>();
+        walkAudioSource.clip = walkSound;
+        walkAudioSource.loop = true; // Jatkuva toisto
+
+        runAudioSource = gameObject.AddComponent<AudioSource>();
+        runAudioSource.clip = runSound;
+        runAudioSource.loop = true; // Jatkuva toisto
     }
 
     void Update () {
-        if (Input.GetKeyDown (KeyCode.P)) {
+        if (Input.GetKeyDown(KeyCode.P)) {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            Debug.Break ();
+            Debug.Break();
         }
-        if (Input.GetKeyDown (KeyCode.O)) {
+        if (Input.GetKeyDown(KeyCode.O)) {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             disabled = !disabled;
@@ -77,49 +83,48 @@ public class FPSController : PortalTraveller {
             return;
         }
 
-        Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
+        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        Vector3 inputDir = new Vector3 (input.x, 0, input.y).normalized;
-        Vector3 worldInputDir = transform.TransformDirection (inputDir);
+        Vector3 inputDir = new Vector3(input.x, 0, input.y).normalized;
+        Vector3 worldInputDir = transform.TransformDirection(inputDir);
 
-        float currentSpeed = (Input.GetKey (KeyCode.LeftShift)) ? runSpeed : walkSpeed;
+        float currentSpeed = (Input.GetKey(KeyCode.LeftShift)) ? runSpeed : walkSpeed;
         Vector3 targetVelocity = worldInputDir * currentSpeed;
-        velocity = Vector3.SmoothDamp (velocity, targetVelocity, ref smoothV, smoothMoveTime);
+        velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
 
         verticalVelocity -= gravity * Time.deltaTime;
-        velocity = new Vector3 (velocity.x, verticalVelocity, velocity.z);
+        velocity = new Vector3(velocity.x, verticalVelocity, velocity.z);
 
-        var flags = controller.Move (velocity * Time.deltaTime);
+        var flags = controller.Move(velocity * Time.deltaTime);
         if (flags == CollisionFlags.Below) {
             jumping = false;
             lastGroundedTime = Time.time;
             verticalVelocity = 0;
         }
 
-        if (Input.GetKeyDown (KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space)) {
             float timeSinceLastTouchedGround = Time.time - lastGroundedTime;
             if (controller.isGrounded || (!jumping && timeSinceLastTouchedGround < 0.15f)) {
                 jumping = true;
-                
-                if(PickupPortalGun.equippedWeapon == PickupPortalGun.Weapon.PortalGun)
-                {
+
+                if (PickupPortalGun.equippedWeapon == PickupPortalGun.Weapon.PortalGun) {
                     animator = GameObject.FindWithTag("PortalGun").GetComponent<Animator>();
                     animator.Rebind();
                     animator.SetTrigger("isJumping");
                 }
-                
+
                 verticalVelocity = jumpForce;
             }
         }
 
-        float mX = Input.GetAxisRaw ("Mouse X");
-        float mY = Input.GetAxisRaw ("Mouse Y");
+        float mX = Input.GetAxisRaw("Mouse X");
+        float mY = Input.GetAxisRaw("Mouse Y");
 
         yaw += mX * mouseSensitivity;
         pitch -= mY * mouseSensitivity;
-        pitch = Mathf.Clamp (pitch, pitchMinMax.x, pitchMinMax.y);
-        smoothPitch = Mathf.SmoothDampAngle (smoothPitch, pitch, ref pitchSmoothV, rotationSmoothTime);
-        smoothYaw = Mathf.SmoothDampAngle (smoothYaw, yaw, ref yawSmoothV, rotationSmoothTime);
+        pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
+        smoothPitch = Mathf.SmoothDampAngle(smoothPitch, pitch, ref pitchSmoothV, rotationSmoothTime);
+        smoothYaw = Mathf.SmoothDampAngle(smoothYaw, yaw, ref yawSmoothV, rotationSmoothTime);
 
         transform.eulerAngles = Vector3.up * smoothYaw;
         cam.transform.localEulerAngles = Vector3.right * smoothPitch;
@@ -132,37 +137,37 @@ public class FPSController : PortalTraveller {
         if (controller.isGrounded) { // Tarkista, onko pelaaja maassa
             if (inputDir.magnitude > 0) { // Pelaaja liikkuu
                 if (Input.GetKey(KeyCode.LeftShift)) { // Pelaaja juoksee
-                    if (!audioSource.isPlaying || audioSource.clip != runSound) {
-                        audioSource.clip = runSound;
-                        audioSource.loop = true; // Jatkuva toisto
-                        audioSource.Play();
+                    if (!runAudioSource.isPlaying) {
+                        walkAudioSource.Stop(); // Pysäytä kävelyääni
+                        runAudioSource.Play(); // Soita juoksuääni
                     }
                 } else { // Pelaaja kävelee
-                    if (!audioSource.isPlaying || audioSource.clip != walkSound) {
-                        audioSource.clip = walkSound;
-                        audioSource.loop = true; // Jatkuva toisto
-                        audioSource.Play();
+                    if (!walkAudioSource.isPlaying) {
+                        runAudioSource.Stop(); // Pysäytä juoksuääni
+                        walkAudioSource.Play(); // Soita kävelyääni
                     }
                 }
             } else {
-                // Pelaaja ei liikku, pysäytä ääni
-                audioSource.Stop();
+                // Pelaaja ei liikku, pysäytä kaikki äänet
+                walkAudioSource.Stop();
+                runAudioSource.Stop();
             }
         } else {
-            // Pelaaja ei ole maassa, pysäytä ääni
-            audioSource.Stop();
+            // Pelaaja ei ole maassa, pysäytä kaikki äänet
+            walkAudioSource.Stop();
+            runAudioSource.Stop();
         }
     }
 
-    public override void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
+    public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
         transform.position = pos;
         Vector3 eulerRot = rot.eulerAngles;
-        float delta = Mathf.DeltaAngle (smoothYaw, eulerRot.y);
+        float delta = Mathf.DeltaAngle(smoothYaw, eulerRot.y);
         yaw += delta;
         smoothYaw += delta;
         transform.eulerAngles = Vector3.up * smoothYaw;
-        velocity = toPortal.TransformVector (fromPortal.InverseTransformVector (velocity));
-        Physics.SyncTransforms ();
+        velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(velocity));
+        Physics.SyncTransforms();
     }
 
     public void SetGunAnimatorComponent(Animator gunAnimator) {
