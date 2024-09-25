@@ -16,8 +16,9 @@ public class PortalGun : MonoBehaviour
 
     public Animator animator;
     
-    // Lisää nämä muuttujat äänen toistamista varten
-    public AudioClip portalSpawnSFX; // Ääniportaali
+    // Äänet portaalin asettamiseen ja epäonnistumiseen
+    public AudioClip portalSpawnSFX; // Ääni portaali spawnille
+    public AudioClip portalFailSFX; // Ääni, kun portaalia ei voi asettaa
     private AudioSource audioSource; // AudioSource-viittaus
 
     void Start()
@@ -65,6 +66,7 @@ public class PortalGun : MonoBehaviour
                 if (IsTooCloseToOtherPortal(hitPoint))
                 {
                     Debug.Log("Portaalia ei voi asettaa liian lähelle toista portaalia.");
+                    PlayPortalFailSound(); // Soitetaan epäonnistumisääni
                     return; // Estetään uuden portaalin sijoittaminen
                 }
 
@@ -115,16 +117,26 @@ public class PortalGun : MonoBehaviour
             else
             {
                 Debug.Log("Ei voi asettaa portaalin siihen objektiin. Objekti ei ole ShootableWall.");
+                PlayPortalFailSound(); // Soita epäonnistumisääni
             }
         }
     }
 
-    // Uusi funktio äänen toistamiselle
+    // Funktio äänen toistamiselle, kun portaali spawnaa
     void PlayPortalSpawnSound()
     {
         if (portalSpawnSFX != null && audioSource != null)
         {
-            audioSource.PlayOneShot(portalSpawnSFX); // Soita ääni kerran
+            audioSource.PlayOneShot(portalSpawnSFX); // Soita portaali spawn -ääni kerran
+        }
+    }
+
+    // Funktio epäonnistuneen äänen toistamiselle
+    void PlayPortalFailSound()
+    {
+        if (portalFailSFX != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(portalFailSFX); // Soita epäonnistumisääni kerran
         }
     }
 
