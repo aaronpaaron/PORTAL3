@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO.Compression;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class FPSController : PortalTraveller {
-
     public float walkSpeed = 3;
+    public Transform playerBody;
     public float runSpeed = 6;
     public float smoothMoveTime = 0.1f;
+    public Slider slider;  
     public float jumpForce = 8;
     public float gravity = 18;
-
+    public float mouseSensitivity = 7f;
     public bool lockCursor;
-    public float mouseSensitivity = 5;
     public Vector2 pitchMinMax = new Vector2 (-40, 85);
     public float rotationSmoothTime = 0.03f;
 
-    CharacterController controller;
+    public CharacterController controller;
     Camera cam;
     public float yaw;
     public float pitch;
@@ -27,8 +28,6 @@ public class FPSController : PortalTraveller {
     float verticalVelocity;
     Vector3 velocity;
     Vector3 smoothV;
-    Vector3 rotationSmoothVelocity;
-    Vector3 currentRotation;
 
     public Animator animator;
 
@@ -37,6 +36,11 @@ public class FPSController : PortalTraveller {
     bool jumping;
     float lastGroundedTime;
     bool disabled;
+
+    // Äänen toistamiseen tarvittavat muuttujat
+    public AudioClip walkSound; // Kävelyääni
+    public AudioClip runSound;  // Juoksuääni
+    private AudioSource audioSource; // AudioSource-komponentti
 
     void Start () {
         cam = Camera.main;
@@ -47,13 +51,25 @@ public class FPSController : PortalTraveller {
 
         controller = GetComponent<CharacterController> ();
 
-        yaw = transform.eulerAngles.y;
+        yaw = cam.transform.eulerAngles.y;
         pitch = cam.transform.localEulerAngles.x;
         smoothYaw = yaw;
         smoothPitch = pitch;
-    }
 
+        // Hanki AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
+    
+    public void AdjustSpeed(float newSpeed)
+    {
+        mouseSensitivity = newSpeed * 10;
+    }
     void Update () {
+
+        PlayerPrefs.SetFloat("currentSensitivity", mouseSensitivity);
         if (Input.GetKeyDown (KeyCode.P)) {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -68,6 +84,14 @@ public class FPSController : PortalTraveller {
         if (disabled) {
             return;
         }
+        {
+            float x = Input .GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+
+            Vector3 move = transform.right * x + transform.forward * z;
+        }
+        
+        
 
         Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
@@ -113,9 +137,37 @@ public class FPSController : PortalTraveller {
         smoothPitch = Mathf.SmoothDampAngle (smoothPitch, pitch, ref pitchSmoothV, rotationSmoothTime);
         smoothYaw = Mathf.SmoothDampAngle (smoothYaw, yaw, ref yawSmoothV, rotationSmoothTime);
 
-        transform.eulerAngles = Vector3.up * smoothYaw;
+        cam.transform.eulerAngles = Vector3.up * smoothYaw;
         cam.transform.localEulerAngles = Vector3.right * smoothPitch;
 
+        // Soita ääntä pelaajan liikkeen mukaan
+        PlayMovementSound(inputDir);
+    }
+
+    void PlayMovementSound(Vector3 inputDir) {
+        if (controller.isGrounded) { // Tarkista, onko pelaaja maassa
+            if (inputDir.magnitude > 0) { // Pelaaja liikkuu
+                if (Input.GetKey(KeyCode.LeftShift)) { // Pelaaja juoksee
+                    if (!audioSource.isPlaying || audioSource.clip != runSound) {
+                        audioSource.clip = runSound;
+                        audioSource.loop = true; // Jatkuva toisto
+                        audioSource.Play();
+                    }
+                } else { // Pelaaja kävelee
+                    if (!audioSource.isPlaying || audioSource.clip != walkSound) {
+                        audioSource.clip = walkSound;
+                        audioSource.loop = true; // Jatkuva toisto
+                        audioSource.Play();
+                    }
+                }
+            } else {
+                // Pelaaja ei liikku, pysäytä ääni
+                audioSource.Stop();
+            }
+        } else {
+            // Pelaaja ei ole maassa, pysäytä ääni
+            audioSource.Stop();
+        }
     }
 
     public override void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
@@ -129,9 +181,7 @@ public class FPSController : PortalTraveller {
         Physics.SyncTransforms ();
     }
 
-
-    public void SetGunAnimatorComponent(Animator gunAnimator)
-    {
+    public void SetGunAnimatorComponent(Animator gunAnimator) {
         animator = gunAnimator;
     }
 }
