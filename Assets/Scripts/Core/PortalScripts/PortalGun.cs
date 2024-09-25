@@ -15,12 +15,23 @@ public class PortalGun : MonoBehaviour
     private float lastFireTime = 0f; // Aika, jolloin viimeisin ammunta tapahtui
 
     public Animator animator;
+    
+    // Lisää nämä muuttujat äänen toistamista varten
+    public AudioClip portalSpawnSFX; // Ääniportaali
+    private AudioSource audioSource; // AudioSource-viittaus
 
     void Start()
     {
         // Piilota molemmat portaalit aluksi
         portalA.SetActive(false);
         portalB.SetActive(false);
+
+        // Hae tai lisää AudioSource-komponentti tähän GameObjectiin
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -76,6 +87,9 @@ public class PortalGun : MonoBehaviour
                     activePortal.transform.position = hitPoint;
                     activePortal.transform.rotation = CalculatePortalRotation(hitNormal);
 
+                    // Soita ääni, kun portaali spawnaa
+                    PlayPortalSpawnSound();
+
                     // Skaalaa portaali nopeasti suureksi
                     StartCoroutine(ScalePortal(activePortal));
                 }
@@ -88,6 +102,10 @@ public class PortalGun : MonoBehaviour
                     // Aseta toinen portaali näkyviin editorin sijaintiin
                     GameObject otherPortal = isPortalAActive ? portalA : portalB;
                     otherPortal.SetActive(true);
+
+                    // Soita ääni toisen portaalin spawnautumiselle
+                    PlayPortalSpawnSound();
+
                     StartCoroutine(ScalePortal(otherPortal)); // Skaalaa myös toinen portaali esiin
                 }
 
@@ -98,6 +116,15 @@ public class PortalGun : MonoBehaviour
             {
                 Debug.Log("Ei voi asettaa portaalin siihen objektiin. Objekti ei ole ShootableWall.");
             }
+        }
+    }
+
+    // Uusi funktio äänen toistamiselle
+    void PlayPortalSpawnSound()
+    {
+        if (portalSpawnSFX != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(portalSpawnSFX); // Soita ääni kerran
         }
     }
 
