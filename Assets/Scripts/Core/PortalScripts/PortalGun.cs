@@ -15,11 +15,17 @@ public class PortalGun : MonoBehaviour
     private float lastFireTime = 0f; // Aika, jolloin viimeisin ammunta tapahtui
 
     public Animator animator;
-    
+
     // Äänet portaalin asettamiseen ja epäonnistumiseen
     public AudioClip portalSpawnSFX; // Ääni portaali spawnille
     public AudioClip portalFailSFX; // Ääni, kun portaalia ei voi asettaa
+    public AudioClip portalLoopSFX; // Looppaava ääni portaalille
+
     private AudioSource audioSource; // AudioSource-viittaus
+
+    // Äänilähteet jokaiselle portaalille
+    private AudioSource portalASource;
+    private AudioSource portalBSource;
 
     void Start()
     {
@@ -33,6 +39,15 @@ public class PortalGun : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+
+        // Lisää AudioSource komponentit portaaleille
+        portalASource = portalA.AddComponent<AudioSource>();
+        portalASource.clip = portalLoopSFX;
+        portalASource.loop = true; // Aseta loopiksi
+
+        portalBSource = portalB.AddComponent<AudioSource>();
+        portalBSource.clip = portalLoopSFX;
+        portalBSource.loop = true; // Aseta loopiksi
     }
 
     void Update()
@@ -72,7 +87,7 @@ public class PortalGun : MonoBehaviour
 
                 // Hanki aktiivinen portaali
                 GameObject activePortal = isPortalAActive ? portalB : portalA;
-                
+
                 animator = GameObject.FindWithTag("PortalGun").GetComponent<Animator>();
                 animator.Rebind();
                 animator.SetTrigger("Shoot");
@@ -91,6 +106,7 @@ public class PortalGun : MonoBehaviour
 
                     // Soita ääni, kun portaali spawnaa
                     PlayPortalSpawnSound();
+                    StartLoopingPortalSound(activePortal); // Aloita looppaava ääni
 
                     // Skaalaa portaali nopeasti suureksi
                     StartCoroutine(ScalePortal(activePortal));
@@ -107,6 +123,7 @@ public class PortalGun : MonoBehaviour
 
                     // Soita ääni toisen portaalin spawnautumiselle
                     PlayPortalSpawnSound();
+                    StartLoopingPortalSound(otherPortal); // Aloita looppaava ääni toiselle portaalille
 
                     StartCoroutine(ScalePortal(otherPortal)); // Skaalaa myös toinen portaali esiin
                 }
@@ -137,6 +154,30 @@ public class PortalGun : MonoBehaviour
         if (portalFailSFX != null && audioSource != null)
         {
             audioSource.PlayOneShot(portalFailSFX); // Soita epäonnistumisääni kerran
+        }
+    }
+
+    void StartLoopingPortalSound(GameObject portal)
+    {
+        if (portal == portalA && portalASource != null)
+        {
+            portalASource.Play(); // Aloita looppaava ääni Portaali A:sta
+        }
+        else if (portal == portalB && portalBSource != null)
+        {
+            portalBSource.Play(); // Aloita looppaava ääni Portaali B:sta
+        }
+    }
+
+    void StopLoopingPortalSound(GameObject portal)
+    {
+        if (portal == portalA && portalASource != null)
+        {
+            portalASource.Stop(); // Pysäytä looppaava ääni Portaali A:sta
+        }
+        else if (portal == portalB && portalBSource != null)
+        {
+            portalBSource.Stop(); // Pysäytä looppaava ääni Portaali B:sta
         }
     }
 
@@ -213,6 +254,16 @@ public class PortalGun : MonoBehaviour
         {
             // Vaakasuora pinta (maa/lattia) - portaali asennetaan ylös osoittaen
             return Quaternion.LookRotation(Vector3.forward, hitNormal);
+        }
+    }
+
+    // Lisää tämä funktio kutsuaksesi looppaavan äänen pysäyttämistä, kun portaali poistuu
+    public void DeactivatePortal(GameObject portal)
+    {
+        if (portal == portalA || portal == portalB)
+        {
+            StopLoopingPortalSound(portal); // Pysäytä looppaava ääni
+            portal.SetActive(false); // Deaktivoidaan portaali
         }
     }
 }
