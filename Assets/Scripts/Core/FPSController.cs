@@ -1,21 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO.Compression;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class FPSController : PortalTraveller {
 
     public float walkSpeed = 3;
+    public Transform playerBody;
     public float runSpeed = 6;
     public float smoothMoveTime = 0.1f;
+    public Slider slider;  
     public float jumpForce = 8;
     public float gravity = 18;
-
+    public float mouseSensitivity = 7f;
     public bool lockCursor;
-    public float mouseSensitivity = 5;
     public Vector2 pitchMinMax = new Vector2 (-40, 85);
     public float rotationSmoothTime = 0.03f;
 
-    CharacterController controller;
+    public CharacterController controller;
     Camera cam;
     public float yaw;
     public float pitch;
@@ -47,13 +49,21 @@ public class FPSController : PortalTraveller {
 
         controller = GetComponent<CharacterController> ();
 
-        yaw = transform.eulerAngles.y;
+        yaw = cam.transform.eulerAngles.y;
         pitch = cam.transform.localEulerAngles.x;
         smoothYaw = yaw;
         smoothPitch = pitch;
-    }
+        
 
+    }
+    
+    public void AdjustSpeed(float newSpeed)
+    {
+        mouseSensitivity = newSpeed * 10;
+    }
     void Update () {
+
+        PlayerPrefs.SetFloat("currentSensitivity", mouseSensitivity);
         if (Input.GetKeyDown (KeyCode.P)) {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -68,6 +78,14 @@ public class FPSController : PortalTraveller {
         if (disabled) {
             return;
         }
+        {
+            float x = Input .GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+
+            Vector3 move = transform.right * x + transform.forward * z;
+        }
+        
+        
 
         Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
@@ -113,7 +131,7 @@ public class FPSController : PortalTraveller {
         smoothPitch = Mathf.SmoothDampAngle (smoothPitch, pitch, ref pitchSmoothV, rotationSmoothTime);
         smoothYaw = Mathf.SmoothDampAngle (smoothYaw, yaw, ref yawSmoothV, rotationSmoothTime);
 
-        transform.eulerAngles = Vector3.up * smoothYaw;
+        cam.transform.eulerAngles = Vector3.up * smoothYaw;
         cam.transform.localEulerAngles = Vector3.right * smoothPitch;
 
     }
