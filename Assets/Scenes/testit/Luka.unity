@@ -6747,6 +6747,9 @@ MonoBehaviour:
   openPosition: {x: 180, y: 0.8, z: -205.73}
   closedPosition: {x: 178, y: 0.8, z: -205.73}
   speed: 0.1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!65 &344988540
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7459,6 +7462,9 @@ MonoBehaviour:
   openPosition: {x: 108.64, y: 1.17, z: -128.17}
   closedPosition: {x: 108.64, y: 1.17, z: -129.67}
   speed: 1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!65 &378203994
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7758,6 +7764,9 @@ MonoBehaviour:
   openPosition: {x: 158.19, y: 20, z: -130.38}
   closedPosition: {x: 158.19, y: 0.8, z: -130.38}
   speed: 2.5
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!65 &399604142
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8696,6 +8705,9 @@ MonoBehaviour:
   openPosition: {x: 92.4, y: -20, z: -105.9}
   closedPosition: {x: 92.4, y: 0.5, z: -105.9}
   speed: 1.02
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!1 &497165692
 GameObject:
   m_ObjectHideFlags: 0
@@ -9217,6 +9229,9 @@ MonoBehaviour:
   openPosition: {x: 184.9, y: -15, z: -177.7}
   closedPosition: {x: 184.9, y: 0.8, z: -177.7}
   speed: 1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!65 &532542543
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11115,6 +11130,9 @@ MonoBehaviour:
   openPosition: {x: 96.455, y: 1.0200527, z: -136.17}
   closedPosition: {x: 97.955, y: 1.0200527, z: -136.17}
   speed: 1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!65 &638475074
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12532,6 +12550,8 @@ MonoBehaviour:
   anim: {fileID: 690200140}
   player: {fileID: 1826229788}
   door: {fileID: 690200135}
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
 --- !u!95 &690200140
 Animator:
   serializedVersion: 5
@@ -13339,6 +13359,9 @@ MonoBehaviour:
   openPosition: {x: 184.52, y: -17, z: -200.61}
   closedPosition: {x: 184.52, y: 0.8, z: -200.61}
   speed: 0.2
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!65 &798224431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14256,6 +14279,7 @@ MonoBehaviour:
   minCollisionForce: 5
   animator: {fileID: 8481131655626193607, guid: c1186dbe3caba824f9ed96dad20dc5bd, type: 3}
   landSFX: {fileID: 0}
+  hoverLoopSFX: {fileID: 0}
 --- !u!1 &849265087
 GameObject:
   m_ObjectHideFlags: 0
@@ -16446,6 +16470,9 @@ MonoBehaviour:
   openPosition: {x: 100.89, y: 1.17, z: -136.17}
   closedPosition: {x: 99.39, y: 1.17, z: -136.17}
   speed: 1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!65 &972920509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17240,9 +17267,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 228073373}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 20
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 10
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -20617,6 +20644,7 @@ MonoBehaviour:
   minCollisionForce: 5
   animator: {fileID: 8481131655626193607, guid: c1186dbe3caba824f9ed96dad20dc5bd, type: 3}
   landSFX: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  hoverLoopSFX: {fileID: 0}
 --- !u!1 &1188067305
 GameObject:
   m_ObjectHideFlags: 0
@@ -20760,6 +20788,9 @@ MonoBehaviour:
   openPosition: {x: 39.7, y: -3.1, z: -130.6}
   closedPosition: {x: -20, y: -3.1, z: -130.6}
   speed: 1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!1 &1192989080
 GameObject:
   m_ObjectHideFlags: 0
@@ -23652,6 +23683,9 @@ MonoBehaviour:
   openPosition: {x: 167.78, y: -15, z: -192}
   closedPosition: {x: 167.78, y: 0.8, z: -192}
   speed: 1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!65 &1414844643
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25901,6 +25935,9 @@ MonoBehaviour:
   openPosition: {x: 108.6479, y: 1.0200527, z: -132.6085}
   closedPosition: {x: 108.6479, y: 1.0200527, z: -131.1085}
   speed: 1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!65 &1568182668
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27503,6 +27540,8 @@ MonoBehaviour:
   anim: {fileID: 1710759531}
   player: {fileID: 1826229788}
   door: {fileID: 1710759529}
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
 --- !u!95 &1710759531
 Animator:
   serializedVersion: 5
@@ -30083,6 +30122,9 @@ MonoBehaviour:
   openPosition: {x: 130.95, y: -20, z: -139}
   closedPosition: {x: 130.95, y: -1.49, z: -139}
   speed: 1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!1 &1854115875
 GameObject:
   m_ObjectHideFlags: 0
@@ -30585,6 +30627,9 @@ MonoBehaviour:
   openPosition: {x: 130.95, y: -20, z: -128}
   closedPosition: {x: 130.95, y: 0.8, z: -128}
   speed: 1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!1 &1870735299
 GameObject:
   m_ObjectHideFlags: 0
@@ -35411,6 +35456,8 @@ MonoBehaviour:
   openPosition: {x: 177.1, y: -15, z: -165.2}
   closedPosition: {x: 177.1, y: 0.8, z: -165.2}
   speed: 2
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
 --- !u!65 &2099310071
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35666,6 +35713,9 @@ MonoBehaviour:
   openPosition: {x: 173, y: 0.8, z: -205.73}
   closedPosition: {x: 175, y: 0.8, z: -205.73}
   speed: 0.1
+  doorOpenSound: {fileID: 0}
+  doorCloseSound: {fileID: 0}
+  bigDoorAlarmSound: {fileID: 0}
 --- !u!65 &2112690818
 BoxCollider:
   m_ObjectHideFlags: 0
