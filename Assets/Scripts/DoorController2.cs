@@ -7,8 +7,22 @@ public class DoorController2 : MonoBehaviour
     public float speed = 2f; // Kuinka nopeasti ovi liikkuu
     
     private bool isOpen = false; // Tieto siitä, onko ovi auki vai ei
-
     private int buttonsPressed = 0; // Kuinka monta nappia on painettu
+
+    // Ääniklipit
+    public AudioClip doorOpenSound;  // Ääni oven avautuessa
+    public AudioClip doorCloseSound; // Ääni oven sulkeutuessa
+    private AudioSource audioSource; // AudioSource-komponentti äänten toistamiseen
+
+    private void Start()
+    {
+        // Hanki tai lisää AudioSource-komponentti
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
 
     private void Update()
     {
@@ -27,10 +41,11 @@ public class DoorController2 : MonoBehaviour
     {
         buttonsPressed++;
 
-        // Jos kaksi nappia on painettuna, avaa ovi
-        if (buttonsPressed == 2)
+        // Jos kaksi nappia on painettuna, avaa ovi ja soita ääni
+        if (buttonsPressed == 2 && !isOpen) 
         {
             isOpen = true;
+            PlaySound(doorOpenSound); // Soita oven avautumisääni
         }
     }
 
@@ -38,10 +53,21 @@ public class DoorController2 : MonoBehaviour
     {
         buttonsPressed--;
 
-        // Jos yhtäkään nappia ei ole enää painettuna, sulje ovi
-        if (buttonsPressed < 2)
+        // Jos yhtäkään nappia ei ole enää painettuna, sulje ovi ja soita ääni
+        if (buttonsPressed < 2 && isOpen)
         {
             isOpen = false;
+            PlaySound(doorCloseSound); // Soita oven sulkeutumisääni
+        }
+    }
+
+    // Äänen toistaminen
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null) // Tarkista, että klippi ja audioSource ovat olemassa
+        {
+            audioSource.clip = clip;
+            audioSource.Play();
         }
     }
 }

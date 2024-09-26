@@ -200,6 +200,9 @@ public class PortalGun : MonoBehaviour
 
         // Skaalaa portaali nopeasti suureksi
         StartCoroutine(ScalePortal(portal));
+
+        // Soita ääni aina, kun portaali siirretään
+        PlayPortalSpawnSound();
     }
 
     IEnumerator ScalePortal(GameObject portal)
