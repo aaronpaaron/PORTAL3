@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: graphicsObject
       value: 
       objectReference: {fileID: 1737408653}
+    - target: {fileID: 5314506192446967032, guid: ae7603665445c2f4eb73b1993e6a0e67, type: 3}
+      propertyPath: landSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
     - target: {fileID: 6589213672373466354, guid: ae7603665445c2f4eb73b1993e6a0e67, type: 3}
       propertyPath: m_LocalPosition.x
       value: 86.4
@@ -539,8 +543,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 1414844642}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!136 &17240688
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3316,6 +3320,10 @@ PrefabInstance:
       propertyPath: graphicsObject
       value: 
       objectReference: {fileID: 1737408653}
+    - target: {fileID: 5314506192446967032, guid: ae7603665445c2f4eb73b1993e6a0e67, type: 3}
+      propertyPath: landSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
     - target: {fileID: 6589213672373466354, guid: ae7603665445c2f4eb73b1993e6a0e67, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.7158759
@@ -4007,8 +4015,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1300128012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.47368422, y: 0}
+  m_AnchorMax: {x: 0.47368422, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4067,7 +4075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &229220846
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4353,8 +4361,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorA: {fileID: 1868866915}
   doorB: {fileID: 1848878458}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!1 &235785085
 GameObject:
   m_ObjectHideFlags: 0
@@ -5406,6 +5414,10 @@ PrefabInstance:
       propertyPath: graphicsObject
       value: 
       objectReference: {fileID: 1737408653}
+    - target: {fileID: 5314506192446967032, guid: ae7603665445c2f4eb73b1993e6a0e67, type: 3}
+      propertyPath: landSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
     - target: {fileID: 6589213672373466354, guid: ae7603665445c2f4eb73b1993e6a0e67, type: 3}
       propertyPath: m_LocalPosition.x
       value: 194.6
@@ -6385,11 +6397,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &335987333 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2944188598080098389, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
-  m_PrefabInstance: {fileID: 1826229787}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &336800973
 GameObject:
   m_ObjectHideFlags: 0
@@ -7656,6 +7663,10 @@ PrefabInstance:
       propertyPath: graphicsObject
       value: 
       objectReference: {fileID: 1737408653}
+    - target: {fileID: 5314506192446967032, guid: ae7603665445c2f4eb73b1993e6a0e67, type: 3}
+      propertyPath: landSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
     - target: {fileID: 6589213672373466354, guid: ae7603665445c2f4eb73b1993e6a0e67, type: 3}
       propertyPath: m_LocalPosition.x
       value: 167.4
@@ -10874,8 +10885,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 478489753}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!136 &619434241
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -14843,8 +14854,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 1188067311}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!1 &911678163
 GameObject:
   m_ObjectHideFlags: 0
@@ -15365,8 +15376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorA: {fileID: 2112690817}
   doorB: {fileID: 344988539}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!136 &936510221
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -20083,8 +20094,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 532542542}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!136 &1172765188
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -20445,7 +20456,7 @@ MonoBehaviour:
   shootForce: 7
   minCollisionForce: 5
   animator: {fileID: 8481131655626193607, guid: c1186dbe3caba824f9ed96dad20dc5bd, type: 3}
-  landSFX: {fileID: 0}
+  landSFX: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
 --- !u!1 &1188067305
 GameObject:
   m_ObjectHideFlags: 0
@@ -23905,7 +23916,7 @@ RectTransform:
   m_Father: {fileID: 280680612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -23991,8 +24002,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 2099310070}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!136 &1469537566
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -24561,8 +24572,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 798224430}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!136 &1512136648
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -26060,8 +26071,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorA: {fileID: 378203993}
   doorB: {fileID: 1568182667}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!1 &1596447911
 GameObject:
   m_ObjectHideFlags: 0
@@ -26242,7 +26253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Main Manu
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -26891,7 +26902,7 @@ RectTransform:
   m_Father: {fileID: 1337184792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.47368422, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -29016,14 +29027,22 @@ PrefabInstance:
     - target: {fileID: 6375389434114746568, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: portalFailSFX
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 5ca67bc52971b564e8eda45f5dd39dae, type: 3}
+    - target: {fileID: 6375389434114746568, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
+      propertyPath: portalLoopSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 69f80ee099e43124695974e1a22c606d, type: 3}
+    - target: {fileID: 6375389434114746568, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
+      propertyPath: portalSpawnSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 69f80ee099e43124695974e1a22c606d, type: 3}
     - target: {fileID: 7233878904780671263, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: yaw
-      value: -40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7233878904780671263, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: pitch
-      value: 85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7233878904780671263, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: slider
@@ -29052,7 +29071,7 @@ PrefabInstance:
     - target: {fileID: 7233878904780671263, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: playerBody
       value: 
-      objectReference: {fileID: 335987333}
+      objectReference: {fileID: 1826229788}
     - target: {fileID: 7233878904780671263, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: mouseSensitivity
       value: 7
@@ -31853,8 +31872,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 2099310070}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!136 &1935731005
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -32672,8 +32691,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 399604141}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!136 &1968406821
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -34457,8 +34476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorA: {fileID: 972920508}
   doorB: {fileID: 638475073}
-  pressSound: {fileID: 0}
-  releaseSound: {fileID: 0}
+  pressSound: {fileID: 8300000, guid: cbb0ff5204cdbc04490c3e733b6dc490, type: 3}
+  releaseSound: {fileID: 8300000, guid: 76253e7635e18d04ebf9e7e9bec6348e, type: 3}
 --- !u!1 &2066689415
 GameObject:
   m_ObjectHideFlags: 0
@@ -35459,7 +35478,7 @@ RectTransform:
   m_Father: {fileID: 831745395}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
