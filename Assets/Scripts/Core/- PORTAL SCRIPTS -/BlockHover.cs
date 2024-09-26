@@ -23,27 +23,27 @@ public class BlockHover : MonoBehaviour
 
     // Ääniefektit
     public AudioClip landSFX; // Ääni, kun palikka osuu maahan
+    public AudioClip hoverLoopSFX; // Looppaava ääni hoveroinnin aikana
     private AudioSource audioSource; // AudioSource-viittaus
 
-void Start()
-{
-    mainCamera = Camera.main; // Hanki pääkamera
-    rb = GetComponent<Rigidbody>(); // Hanki Rigidbody-komponentti
-
-    // Hanki tai lisää AudioSource-komponentti tähän GameObjectiin
-    audioSource = GetComponent<AudioSource>();
-    if (audioSource == null)
+    void Start()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
+        mainCamera = Camera.main; // Hanki pääkamera
+        rb = GetComponent<Rigidbody>(); // Hanki Rigidbody-komponentti
+
+        // Hanki tai lisää AudioSource-komponentti tähän GameObjectiin
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Aseta äänilähde 3D:ksi ja säädä sen ominaisuuksia
+        audioSource.spatialBlend = 1.0f; // 1.0 tarkoittaa täysin 3D-ääntä
+        audioSource.rolloffMode = AudioRolloffMode.Logarithmic; // Äänenvoimakkuus heikkenee logaritmisesti etäisyyden mukaan
+        audioSource.minDistance = 1.0f; // Etäisyys, jolla ääni kuuluu normaalisti
+        audioSource.maxDistance = 20.0f; // Etäisyys, jonka jälkeen ääni on hyvin hiljainen
     }
-
-    // Aseta äänilähde 3D:ksi ja säädä sen ominaisuuksia
-    audioSource.spatialBlend = 1.0f; // 1.0 tarkoittaa täysin 3D-ääntä
-    audioSource.rolloffMode = AudioRolloffMode.Logarithmic; // Äänenvoimakkuus heikkenee logaritmisesti etäisyyden mukaan
-    audioSource.minDistance = 1.0f; // Etäisyys, jolla ääni kuuluu normaalisti
-    audioSource.maxDistance = 20.0f; // Etäisyys, jonka jälkeen ääni on hyvin hiljainen
-}
-
 
     void Update()
     {
@@ -99,7 +99,6 @@ void Start()
             isHovering = true;
             animator = GameObject.FindWithTag("PortalGun").GetComponent<Animator>();
             animator.Rebind();
-
             animator.SetTrigger("Hovering");
 
             // Poista gravitaatio hoveroinnin ajaksi
@@ -107,6 +106,9 @@ void Start()
 
             // Anna nopea nostovoima, jotta palikka saadaan ilmaan
             rb.AddForce(Vector3.up * hoverForce, ForceMode.VelocityChange);
+
+            // Aloita looppaava ääni
+            StartLoopingHoverSound();
         }
     }
 
@@ -118,6 +120,9 @@ void Start()
 
             // Palauta gravitaatio, jotta palikka tippuu maahan
             rb.useGravity = true;
+
+            // Pysäytä looppaava ääni
+            StopLoopingHoverSound();
         }
     }
 
@@ -212,6 +217,27 @@ void Start()
         if (landSFX != null && audioSource != null)
         {
             audioSource.PlayOneShot(landSFX);
+        }
+    }
+
+    // Aloita looppaava hover-ääni
+    void StartLoopingHoverSound()
+    {
+        if (hoverLoopSFX != null && audioSource != null)
+        {
+            audioSource.clip = hoverLoopSFX; // Aseta looppaava ääni
+            audioSource.loop = true; // Ota looppaaminen käyttöön
+            audioSource.Play(); // Soita ääni
+        }
+    }
+
+    // Pysäytä looppaava hover-ääni
+    void StopLoopingHoverSound()
+    {
+        if (audioSource != null)
+        {
+            audioSource.loop = false; // Poista looppaaminen
+            audioSource.Stop(); // Pysäytä ääni
         }
     }
 }
