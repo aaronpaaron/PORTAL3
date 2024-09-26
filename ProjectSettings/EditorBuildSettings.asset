@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 0a7e69ea0d0177447a09ebb32f66685d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/testit/Luka.unity
     guid: 900dd02617f081645a4a259b8bdeeb10
   - enabled: 1
     path: Assets/Scenes/END SCREEN.unity
     guid: 30271892e381ac54a85efa6c63b3eeb3
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 4ceb5398e06db434c9da9738600e5fe2
   m_configObjects: {}
