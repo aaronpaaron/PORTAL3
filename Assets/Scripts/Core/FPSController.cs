@@ -26,6 +26,8 @@ public class FPSController : PortalTraveller {
     float verticalVelocity;
     Vector3 velocity;
     Vector3 smoothV;
+    Vector3 rotationSmoothVelocity;
+    Vector3 currentRotation;
 
     public Animator animator;
 
@@ -56,6 +58,7 @@ public class FPSController : PortalTraveller {
         pitch = cam.transform.localEulerAngles.x;
         smoothYaw = yaw;
         smoothPitch = pitch;
+        Cursor.visible = false;
 
         // Luo AudioSource-komponentit kävely- ja juoksuäänille
         walkAudioSource = gameObject.AddComponent<AudioSource>();
@@ -67,8 +70,23 @@ public class FPSController : PortalTraveller {
         runAudioSource.loop = true; // Jatkuva toisto
     }
 
-    void Update () {
-        if (Input.GetKeyDown(KeyCode.P)) {
+      public void AdjustSpeed(float newSpeed)
+    {
+        mouseSensitivity = newSpeed;
+        //Debug.Log("Mouse sensitivity changed to: " + mouseSensitivity);
+    }
+
+    void Update () 
+    {
+        PlayerPrefs.SetFloat("currentSensitivity", mouseSensitivity);
+         
+             if (!PauseMenu.isPaused)
+        {
+            Cursor.visible = false;
+        }
+        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Debug.Break();
@@ -81,6 +99,12 @@ public class FPSController : PortalTraveller {
 
         if (disabled) {
             return;
+        }
+        {
+          float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+
+            Vector3 move = transform.right * x + transform.forward * z;
         }
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -125,6 +149,8 @@ public class FPSController : PortalTraveller {
         pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
         smoothPitch = Mathf.SmoothDampAngle(smoothPitch, pitch, ref pitchSmoothV, rotationSmoothTime);
         smoothYaw = Mathf.SmoothDampAngle(smoothYaw, yaw, ref yawSmoothV, rotationSmoothTime);
+
+
 
         transform.eulerAngles = Vector3.up * smoothYaw;
         cam.transform.localEulerAngles = Vector3.right * smoothPitch;
