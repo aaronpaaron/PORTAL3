@@ -6397,11 +6397,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &335987333 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2944188598080098389, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
-  m_PrefabInstance: {fileID: 1826229787}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &336800973
 GameObject:
   m_ObjectHideFlags: 0
@@ -29043,11 +29038,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 69f80ee099e43124695974e1a22c606d, type: 3}
     - target: {fileID: 7233878904780671263, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: yaw
-      value: -40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7233878904780671263, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: pitch
-      value: 85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7233878904780671263, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: slider
@@ -29076,7 +29071,7 @@ PrefabInstance:
     - target: {fileID: 7233878904780671263, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: playerBody
       value: 
-      objectReference: {fileID: 335987333}
+      objectReference: {fileID: 1826229788}
     - target: {fileID: 7233878904780671263, guid: d75552e652b273c40bde08ff00c169c1, type: 3}
       propertyPath: mouseSensitivity
       value: 7
