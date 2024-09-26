@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/testit/Luka.unity
     guid: 900dd02617f081645a4a259b8bdeeb10
+  - enabled: 1
+    path: Assets/Scenes/END SCREEN.unity
+    guid: 30271892e381ac54a85efa6c63b3eeb3
   m_configObjects: {}
