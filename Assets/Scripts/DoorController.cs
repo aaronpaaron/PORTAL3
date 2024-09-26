@@ -13,8 +13,9 @@ public class DoorController : MonoBehaviour
     public AudioClip doorOpenSound;  // Ääni oven avautuessa
     public AudioClip doorCloseSound; // Ääni oven sulkeutuessa
     public AudioClip bigDoorAlarmSound;   // Lisä-ääni, jos kyseessä on iso ovi (BigDoor)
-    
-    private AudioSource audioSource; // AudioSource-komponentti äänten toistamiseen
+    public AudioClip bigDoorIntercom; // Toinen ääni, jos kyseessä on iso ovi (BigDoor)
+
+    public AudioSource audioSource; // AudioSource-komponentti äänten toistamiseen
 
     private void Start()
     {
@@ -45,11 +46,15 @@ public class DoorController : MonoBehaviour
         {
             isOpen = true; // Avaa ovi
             PlaySound(doorOpenSound); // Soita oven avautumisääni
-            
+
             // Jos objektin tägi on "BigDoor", soita lisä-ääni
             if (CompareTag("BigDoor"))
             {
-                PlaySound(bigDoorAlarmSound); // Soita lisä-ääni
+                //Debug.Log("ääni sanoo pöö ja aukesi");
+                PlaySound(bigDoorAlarmSound); // Soita alarmin ääni
+                PlaySound(bigDoorIntercom); // Soita toinen ääni
+                VolumeReducer volumeReducerComponent = GameObject.Find("EndRoomMusic").GetComponent<VolumeReducer>();
+                StartCoroutine(volumeReducerComponent.FadeOutAudio());
             }
         }
     }
@@ -60,11 +65,15 @@ public class DoorController : MonoBehaviour
         {
             isOpen = false; // Sulje ovi
             PlaySound(doorCloseSound); // Soita oven sulkeutumisääni
-            
+
             // Jos objektin tägi on "BigDoor", soita lisä-ääni
             if (CompareTag("BigDoor"))
             {
-                PlaySound(bigDoorAlarmSound); // Soita lisä-ääni
+                //Debug.Log("ääni sanoo pöö ja meni kiinni");
+                PlaySound(bigDoorAlarmSound); // Soita alarmin ääni
+                PlaySound(bigDoorIntercom); // Soita toinen ääni
+                VolumeReducer volumeReducerComponent = GameObject.Find("EndRoomMusic").GetComponent<VolumeReducer>();
+                StartCoroutine(volumeReducerComponent.FadeOutAudio());
             }
         }
     }
@@ -74,8 +83,9 @@ public class DoorController : MonoBehaviour
     {
         if (clip != null && audioSource != null) // Tarkista, että klippi ja audioSource ovat olemassa
         {
-            audioSource.clip = clip;
-            audioSource.Play();
+            //audioSource.clip = clip;
+            //audioSource.Play();
+            audioSource.PlayOneShot(clip);
         }
     }
 
