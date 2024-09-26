@@ -6,9 +6,15 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
+    void Start()
+    {
+        Cursor.visible = true;
+    }
+    
     public void PlayGame()
     {
         SceneManager.LoadSceneAsync("SampleScene");
+        Cursor.visible = false;
     }
  public void Settings(int sceneID)
     {
