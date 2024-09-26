@@ -9,6 +9,23 @@ public class DoorController : MonoBehaviour
 
     private bool isOpen = false; // Tieto siitä, onko ovi auki vai ei
 
+    // Ääniklipit
+    public AudioClip doorOpenSound;  // Ääni oven avautuessa
+    public AudioClip doorCloseSound; // Ääni oven sulkeutuessa
+    public AudioClip bigDoorAlarmSound;   // Lisä-ääni, jos kyseessä on iso ovi (BigDoor)
+    
+    private AudioSource audioSource; // AudioSource-komponentti äänten toistamiseen
+
+    private void Start()
+    {
+        // Hanki tai lisää AudioSource-komponentti
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
+
     private void Update()
     {
         // Jos ovi on auki, siirrä sitä openPositioniin, muuten closedPositioniin
@@ -24,16 +41,54 @@ public class DoorController : MonoBehaviour
 
     public void OpenDoor()
     {
-        isOpen = true; // Avaa ovi
+        if (!isOpen) // Varmista, ettei ääntä soiteta useaan kertaan
+        {
+            isOpen = true; // Avaa ovi
+            PlaySound(doorOpenSound); // Soita oven avautumisääni
+            
+            // Jos objektin tägi on "BigDoor", soita lisä-ääni
+            if (CompareTag("BigDoor"))
+            {
+                PlaySound(bigDoorAlarmSound); // Soita lisä-ääni
+            }
+        }
     }
 
     public void CloseDoor()
     {
-        isOpen = false; // Sulje ovi
+        if (isOpen) // Varmista, ettei ääntä soiteta useaan kertaan
+        {
+            isOpen = false; // Sulje ovi
+            PlaySound(doorCloseSound); // Soita oven sulkeutumisääni
+            
+            // Jos objektin tägi on "BigDoor", soita lisä-ääni
+            if (CompareTag("BigDoor"))
+            {
+                PlaySound(bigDoorAlarmSound); // Soita lisä-ääni
+            }
+        }
     }
 
+    // Äänen toistaminen
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null) // Tarkista, että klippi ja audioSource ovat olemassa
+        {
+            audioSource.clip = clip;
+            audioSource.Play();
+        }
+    }
+
+    // Simuloi napin painallusta oven avaamiseksi tai sulkemiseksi
     internal void PressButton()
     {
-        throw new NotImplementedException();
+        if (isOpen)
+        {
+            CloseDoor();
+        }
+        else
+        {
+            OpenDoor();
+        }
     }
 }
