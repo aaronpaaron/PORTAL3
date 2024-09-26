@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("Luka");
+        SceneManager.LoadSceneAsync("SampleScene");
     }
  public void Settings(int sceneID)
     {
